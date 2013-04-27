@@ -9,7 +9,7 @@ import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 import android.content.Context;
 import android.graphics.Color;
-
+//
 public class BarGraph{
 
 	public GraphicalView getView(Context context) 
