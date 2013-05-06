@@ -20,7 +20,7 @@ public final class R {
         public static final int EditText02=0x7f070001;
         public static final int EditTextConfirmPass=0x7f070014;
         public static final int RelativeLayout1=0x7f070005;
-        public static final int button1=0x7f070017;
+        public static final int add=0x7f070023;
         public static final int button2=0x7f070019;
         public static final int button3=0x7f070018;
         public static final int buttonForgotPass=0x7f07000a;
@@ -31,19 +31,22 @@ public final class R {
         public static final int buttonRemove=0x7f07001e;
         public static final int buttonStart=0x7f07000c;
         public static final int buttonSync=0x7f07001c;
-        public static final int chart=0x7f070025;
+        public static final int button_save=0x7f070017;
+        public static final int chart=0x7f070027;
         public static final int checkBoxKeepLog=0x7f070008;
+        public static final int delete=0x7f070024;
         public static final int editTextPassword=0x7f070007;
         public static final int editTextUsername=0x7f070006;
+        public static final int group=0x7f070022;
         public static final int linearLayout1=0x7f070016;
         public static final int linearLayout2=0x7f07001a;
         public static final int loadingProgressBar=0x7f070004;
         public static final int maliste=0x7f070015;
-        public static final int menu_settings=0x7f070027;
-        public static final int montexte=0x7f070026;
+        public static final int menu_settings=0x7f070029;
+        public static final int montexte=0x7f070028;
         public static final int profilePicture=0x7f070003;
         public static final int progressBar1=0x7f07001b;
-        public static final int relativeLayout2=0x7f070022;
+        public static final int relativeLayout2=0x7f070025;
         public static final int seekBar1=0x7f07000d;
         public static final int spinner1=0x7f070012;
         public static final int spinner2=0x7f070010;
@@ -52,11 +55,10 @@ public final class R {
         public static final int tab2=0x7f070020;
         public static final int tab3=0x7f070021;
         public static final int textView1=0x7f070000;
-        public static final int textView2=0x7f070013;
         public static final int textView3=0x7f070011;
         public static final int textView4=0x7f07000f;
-        public static final int textView5=0x7f070023;
-        public static final int textView6=0x7f070024;
+        public static final int textView6=0x7f070026;
+        public static final int textView_time=0x7f070013;
     }
     public static final class layout {
         public static final int activity_forgot=0x7f030000;
@@ -69,9 +71,10 @@ public final class R {
         public static final int activity_tab_me=0x7f030007;
         public static final int activity_tab_settings=0x7f030008;
         public static final int activity_tabs=0x7f030009;
-        public static final int activity_workout=0x7f03000a;
-        public static final int activity_workout_history=0x7f03000b;
-        public static final int maliste=0x7f03000c;
+        public static final int activity_test_database=0x7f03000a;
+        public static final int activity_workout=0x7f03000b;
+        public static final int activity_workout_history=0x7f03000c;
+        public static final int maliste=0x7f03000d;
     }
     public static final class menu {
         public static final int activity_main=0x7f060000;

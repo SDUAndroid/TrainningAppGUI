@@ -128,7 +128,7 @@ public class MainActivity extends Activity{
 
 			switch (v.getId()) {
 
-			case R.id.button1: {
+			case R.id.button_save: {
 				mET1.append("\nEnabled...waiting data");
 				btct1 = new BtConnectorThreaded(getApplicationContext(),
 						BT_DEVICE_1_MAC, BT_DEVICE_1_ID);
