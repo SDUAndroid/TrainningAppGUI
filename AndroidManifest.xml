@@ -57,6 +57,10 @@
             android:name="com.pse.trainingappdroid.TabsMeActivity"
             android:label="@string/app_name" >
         </activity>
+         <activity
+            android:name="com.pse.trainingappdroid.TestDatabaseActivity"
+            android:label="@string/app_name" >
+        </activity>
         <activity
             android:name="com.pse.trainingappdroid.WorkoutActivity"
             android:label="@string/app_name" >

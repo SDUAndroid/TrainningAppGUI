@@ -28,24 +28,25 @@ public class MainActivity extends Activity
 	private static final String TAG = "MainActivity";
 
 	private Button butStart = null;
-
-	private EditText mET1 = null;
-	private TextView tv = null;
+//
+//	private EditText mET1 = null;
+//	private TextView tv = null;
 	private SeekBar sb_threshold = null;
 
-	private boolean workout = false;
-	private boolean running = false;
-	public static int stretchCounter = 0;
-
-	private BtMultiResponseReceiver btMultiResponseReceiver = null;
-	private IntentFilter multiFilter = null;
-	private IntentFilter multiHrFilter = null;
-
-	private static final int BT_DEVICE_1_ID = 1;
-	private static final String BT_DEVICE_1_MAC = "00:06:66:49:59:0F";
-
-	private BtConnectorThreaded btct1 = null, btct2 = null;
-	private BtConnectorPolarThreaded btct3 = null;
+//	private boolean workout = false;
+//	private boolean running = false;
+//	public static int stretchCounter = 0;
+//	private int mET1_lines = 0;
+//	
+//	private BtMultiResponseReceiver btMultiResponseReceiver = null;
+//	private IntentFilter multiFilter = null;
+//	private IntentFilter multiHrFilter = null;
+//
+//	private static final int BT_DEVICE_1_ID = 1;
+//	private static final String BT_DEVICE_1_MAC = "00:06:66:49:59:0F";
+//
+//	private BtConnectorThreaded btct1 = null, btct2 = null;
+//	private BtConnectorPolarThreaded btct3 = null;
 
 	/**
 	 * -- END
@@ -64,27 +65,27 @@ public class MainActivity extends Activity
 		}
 	}
 
-	@Override
-	protected void onResume()
-	{
-		super.onResume();
-		if (D) {
-			Log.d(TAG, "+ On Resume +");
-		}
-		this.registerReceiver(this.btMultiResponseReceiver, this.multiFilter);
-		this.registerReceiver(this.btMultiResponseReceiver, this.multiHrFilter);
-	}
-
-	@Override
-	protected void onPause()
-	{
-		super.onPause();
-		if (D) {
-			Log.d(TAG, "- On Pause -");
-		}
-
-		this.unregisterReceiver(this.btMultiResponseReceiver);
-	}
+//	@Override
+//	protected void onResume()
+//	{
+//		super.onResume();
+//		if (D) {
+//			Log.d(TAG, "+ On Resume +");
+//		}
+//		this.registerReceiver(this.btMultiResponseReceiver, this.multiFilter);
+//		this.registerReceiver(this.btMultiResponseReceiver, this.multiHrFilter);
+//	}
+//
+//	@Override
+//	protected void onPause()
+//	{
+//		super.onPause();
+//		if (D) {
+//			Log.d(TAG, "- On Pause -");
+//		}
+//
+//		this.unregisterReceiver(this.btMultiResponseReceiver);
+//	}
 
 	@Override
 	protected void onStop()
@@ -95,23 +96,23 @@ public class MainActivity extends Activity
 		super.onStop();
 	}
 
-	@Override
-	protected void onDestroy()
-	{
-		super.onDestroy();
-		if (D) {
-			Log.d(TAG, "--- On Destroy ---");
-		}
-		if (this.btct1 != null) {
-			this.btct1.disconnect();
-		}
-		if (this.btct2 != null) {
-			this.btct2.disconnect();
-		}
-		if (this.btct3 != null) {
-			this.btct3.disconnect();
-		}
-	}
+//	@Override
+//	protected void onDestroy()
+//	{
+//		super.onDestroy();
+//		if (D) {
+//			Log.d(TAG, "--- On Destroy ---");
+//		}
+//		if (this.btct1 != null) {
+//			this.btct1.disconnect();
+//		}
+//		if (this.btct2 != null) {
+//			this.btct2.disconnect();
+//		}
+//		if (this.btct3 != null) {
+//			this.btct3.disconnect();
+//		}
+//	}
 
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState)
@@ -145,11 +146,8 @@ public class MainActivity extends Activity
 
 					if (D) {
 						Log.d(TAG, "Click start activity");
-					}
-					MainActivity.this.btct1 = new BtConnectorThreaded(
-							MainActivity.this.getApplicationContext(), BT_DEVICE_1_MAC, BT_DEVICE_1_ID);
-					MainActivity.this.btct1.connect();
-
+					}				
+					//Lets try to move the connexion to the workout activity
 					Intent intent = new Intent(MainActivity.this, WorkoutActivity.class);
 					MainActivity.this.startActivity(intent);
 				}
@@ -195,9 +193,9 @@ public class MainActivity extends Activity
 		}
 
 		// Setup broadcast receiver
-		this.btMultiResponseReceiver = new BtMultiResponseReceiver();
-		this.multiFilter = new IntentFilter(BtConnectorThreaded.BT_NEW_DATA_INTENT);
-		this.multiHrFilter = new IntentFilter(BtConnectorPolarThreaded.BT_NEW_DATA_INTENT);
+//		this.btMultiResponseReceiver = new BtMultiResponseReceiver();
+//		this.multiFilter = new IntentFilter(BtConnectorThreaded.BT_NEW_DATA_INTENT);
+//		this.multiHrFilter = new IntentFilter(BtConnectorPolarThreaded.BT_NEW_DATA_INTENT);
 
 //		// Find views
 		butStart = (Button) this.findViewById(R.id.buttonStartWorkout);
@@ -229,80 +227,82 @@ public class MainActivity extends Activity
 		return false;
 	}
 
-	private class BtMultiResponseReceiver extends BroadcastReceiver
-	{
-
-		@Override
-		public void onReceive(Context context, Intent intent)
-		{
-
-			int id = 0;
-			String line = "";
-
-			if (intent.hasExtra(BtConnectorThreaded.BT_NEW_DATA_INTENT_EXTRA_BT_DATA)) {
-				line = intent.getStringExtra(BtConnectorThreaded.BT_NEW_DATA_INTENT_EXTRA_BT_DATA);
-				id = intent.getIntExtra(BtConnectorThreaded.BT_NEW_DATA_INTENT_EXTRA_BT_DATA_STREAM_ID, 0);
-
-			}
-			else if (intent.hasExtra(BtConnectorPolarThreaded.BT_NEW_DATA_INTENT_EXTRA_BT_HR_DATA)) {
-				line = ""
-						+ intent.getIntExtra(BtConnectorPolarThreaded.BT_NEW_DATA_INTENT_EXTRA_BT_HR_DATA, 0);
-				id = intent.getIntExtra(BtConnectorPolarThreaded.BT_NEW_DATA_INTENT_EXTRA_BT_DATA_STREAM_ID,
-						0);
-			}
-
-			switch (id)
-			{
-
-				case BT_DEVICE_1_ID://Work with bt data here
-					// MainActivity.this.mET1_lines++;
-					// mET1.append("\n" + mET1_lines + ": " + line);
-					// mET1.setText("\n" + mET1_lines + ": " + line);
-					if (MainActivity.this.running) {
-						MainActivity.this.tv.setText(this.getStrength(line));
-
-						MainActivity.this.sb_threshold.setProgress(Integer.parseInt(line) - 42000);
-					}
-					break;
-
-			}
-
-		}
-
-		/**
-		 * @param value
-		 *            from the sensor
-		 * @return conversion to low,normal,hard strength
-		 */
-		private String getStrength(String value)
-		{
-
-			int strengthBT = Integer.parseInt(value);
-			String strength = null;
-
-			if (strengthBT < 48000) {
-
-				strength = "More please";// low
-
-				MainActivity.this.workout = true;
-			}
-			if (strengthBT > 55000) {
-				strength = "Woaaah";
-
-				if (MainActivity.this.workout) {
-					stretchCounter++;
-					MainActivity.this.workout = false;
-					MainActivity.this.mET1.setText("Your streches---> " + stretchCounter);
-
-				}
-			}
-			if ( ( strengthBT >= 48000 ) && ( strengthBT <= 55000 )) {
-				strength = "Okay...";
-			}
-
-			return strength;
-		}
-
-	}
+//	private class BtMultiResponseReceiver extends BroadcastReceiver
+//	{
+//
+//		@Override
+//		public void onReceive(Context context, Intent intent)
+//		{
+//
+//			int id = 0;
+//			String line = "";
+//
+//			if (intent.hasExtra(BtConnectorThreaded.BT_NEW_DATA_INTENT_EXTRA_BT_DATA)) {
+//				line = intent.getStringExtra(BtConnectorThreaded.BT_NEW_DATA_INTENT_EXTRA_BT_DATA);
+//				id = intent.getIntExtra(BtConnectorThreaded.BT_NEW_DATA_INTENT_EXTRA_BT_DATA_STREAM_ID, 0);
+//
+//			}
+//			else if (intent.hasExtra(BtConnectorPolarThreaded.BT_NEW_DATA_INTENT_EXTRA_BT_HR_DATA)) {
+//				line = ""
+//						+ intent.getIntExtra(BtConnectorPolarThreaded.BT_NEW_DATA_INTENT_EXTRA_BT_HR_DATA, 0);
+//				id = intent.getIntExtra(BtConnectorPolarThreaded.BT_NEW_DATA_INTENT_EXTRA_BT_DATA_STREAM_ID,
+//						0);
+//			}
+//
+//			switch (id)
+//			{
+//
+//				case BT_DEVICE_1_ID://Work with bt data here
+//					
+//					
+//					
+//					if (MainActivity.this.running) {
+//						MainActivity.this.tv.setText(this.getStrength(line));
+//
+//						MainActivity.this.sb_threshold.setProgress(Integer.parseInt(line) - 42000);
+//					}
+//					break;
+//
+//			}
+//
+//		}
+//
+//		/**
+//		 * @param value
+//		 *            from the sensor
+//		 * @return conversion to low,normal,hard strength
+//		 */
+//		private String getStrength(String value)
+//		{
+//
+//			int strengthBT = Integer.parseInt(value);
+//			String strength = null;
+//
+//			if (strengthBT < 48000) {
+//
+//				strength = "More please";// low
+//
+//				MainActivity.this.workout = true;
+//			}
+//			if (strengthBT > 55000) {
+//				strength = "Woaaah";
+//				
+//				Log.v(TAG, "MAX FORCE");
+//				
+//				if (MainActivity.this.workout) {
+//					stretchCounter++;
+//					MainActivity.this.workout = false;
+//					MainActivity.this.mET1.setText("Your streches---> " + stretchCounter);
+//
+//				}
+//			}
+//			if ( ( strengthBT >= 48000 ) && ( strengthBT <= 55000 )) {
+//				strength = "Okay...";
+//			}
+//
+//			return strength;
+//		}
+//
+//	}
 
 }

@@ -44,14 +44,14 @@ public class TestDatabaseActivity extends ListActivity {
 		switch (view.getId()) {
 		case R.id.add:
 
-			if (MainActivity.stretchCounter == 0) {
+			if (WorkoutActivity.stretchCounter == 0) {
 				Toast.makeText(this, "Your record is already added", Toast.LENGTH_SHORT).show();
 				break;
 			}
 			counter = this.datasource
-					.createMaxCount(MainActivity.stretchCounter);
+					.createMaxCount(WorkoutActivity.stretchCounter);
 			adapter.add(counter);
-			MainActivity.stretchCounter = 0;
+			WorkoutActivity.stretchCounter = 0;
 			break;
 		case R.id.delete:
 			if (this.getListAdapter().getCount() > 0) {
