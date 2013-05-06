@@ -15,18 +15,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import com.pse.trainingappdroid.BtConnectorPolarThreaded;
-import com.pse.trainingappdroid.BtConnectorThreaded;
-import com.pse.trainingappdroid.R;
-import com.pse.trainingappdroid.TestDatabaseActivity;
+
 //import com.pse.trainingappdroid.MainActivity.BtMultiResponseReceiver;
 
-public class MainActivity extends Activity{
-	
-	/** BT Backend params
-	 * 	Code by Alejandro and Lucas
-	 * -- START
-	 * **/
+public class MainActivity extends Activity
+{
+
+	/**
+	 * BT Backend params Code by Alejandro and Lucas -- START
+	 **/
 	private static final Boolean D = true;
 	private static final String TAG = "MainActivity";
 
@@ -48,275 +45,287 @@ public class MainActivity extends Activity{
 
 	private BtConnectorThreaded btct1 = null, btct2 = null;
 	private BtConnectorPolarThreaded btct3 = null;
-	
+
 	/**
 	 * -- END
 	 */
-	
+
 	/**
-	 * BT Backend methods
-	 * Code by Alejandro and Lucas
-	 * -- START
+	 * BT Backend methods Code by Alejandro and Lucas -- START
 	 */
 
-	@Override
-	protected void onStart() {
-		super.onStart();
-		if (D)
-			Log.d(TAG, "++ On Start ++");
-	}
+//	@Override
+//	protected void onStart()
+//	{
+//		super.onStart();
+//		if (D) {
+//			Log.d(TAG, "++ On Start ++");
+//		}
+//	}
+
+//	@Override
+//	protected void onResume()
+//	{
+//		super.onResume();
+//		if (D) {
+//			Log.d(TAG, "+ On Resume +");
+//		}
+//		this.registerReceiver(this.btMultiResponseReceiver, this.multiFilter);
+//		this.registerReceiver(this.btMultiResponseReceiver, this.multiHrFilter);
+//	}
+
+//	@Override
+//	protected void onPause()
+//	{
+//		super.onPause();
+//		if (D) {
+//			Log.d(TAG, "- On Pause -");
+//		}
+//		this.tv.setText("Start workout");
+//		this.mET1.setText("Your streches---> 0");
+//
+//		this.unregisterReceiver(this.btMultiResponseReceiver);
+//	}
+
+//	@Override
+//	protected void onStop()
+//	{
+//		if (D) {
+//			Log.d(TAG, "-- On Stop --");
+//		}
+//		super.onStop();
+//	}
+
+//	@Override
+//	protected void onDestroy()
+//	{
+//		super.onDestroy();
+//		if (D) {
+//			Log.d(TAG, "--- On Destroy ---");
+//		}
+//		if (this.btct1 != null) {
+//			this.btct1.disconnect();
+//		}
+//		if (this.btct2 != null) {
+//			this.btct2.disconnect();
+//		}
+//		if (this.btct3 != null) {
+//			this.btct3.disconnect();
+//		}
+//	}
 
 	@Override
-	protected void onResume() {
-		super.onResume();
-		if (D)
-			Log.d(TAG, "+ On Resume +");
-		registerReceiver(btMultiResponseReceiver, multiFilter);
-		registerReceiver(btMultiResponseReceiver, multiHrFilter);
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		if (D)
-			Log.d(TAG, "- On Pause -");
-		tv.setText("Start workout");
-		mET1.setText("Your streches---> 0");
-
-		unregisterReceiver(btMultiResponseReceiver);
-	}
-
-	@Override
-	protected void onStop() {
-		if (D)
-			Log.d(TAG, "-- On Stop --");
-		super.onStop();
-	}
-
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		if (D)
-			Log.d(TAG, "--- On Destroy ---");
-		if (btct1 != null)
-			btct1.disconnect();
-		if (btct2 != null)
-			btct2.disconnect();
-		if (btct3 != null)
-			btct3.disconnect();
-	}
-	
-	@Override
-	protected void onRestoreInstanceState(Bundle savedInstanceState) {
-		if (D)
+	protected void onRestoreInstanceState(Bundle savedInstanceState)
+	{
+		if (D) {
 			Log.d(TAG, "+ On Restore Instance State +");
+		}
 		super.onRestoreInstanceState(savedInstanceState);
 
 	}
 
 	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		if (D)
+	protected void onSaveInstanceState(Bundle outState)
+	{
+		if (D) {
 			Log.d(TAG, "- On Save Instance State -");
+		}
 		super.onSaveInstanceState(outState);
 	}
-	
-	OnClickListener mOnClickListener = new OnClickListener() {
 
-		@Override
-		public void onClick(View v) {
+//	OnClickListener mOnClickListener = new OnClickListener() {
+//
+//		@Override
+//		public void onClick(View v)
+//		{
+//
+//			switch (v.getId())
+//			{
+//
+//				case R.id.button_save: {
+//					MainActivity.this.mET1.append("\nEnabled...waiting data");
+//					MainActivity.this.btct1 = new BtConnectorThreaded(
+//							MainActivity.this.getApplicationContext(), BT_DEVICE_1_MAC, BT_DEVICE_1_ID);
+//					MainActivity.this.btct1.connect();
+//				}
+//					break;
+//
+//				case R.id.button2: {
+//					if (!MainActivity.this.running) {
+//						break;
+//					}
+//
+//					Intent myIntent = new Intent(v.getContext(), TestDatabaseActivity.class);
+//					MainActivity.this.startActivityForResult(myIntent, 0);
+//					MainActivity.this.running = false;
+//				}
+//					break;
+//
+//				case R.id.button3: {
+//
+//					MainActivity.this.running = true;
+//					MainActivity.this.mET1.setText("Your streches---> " + stretchCounter);
+//				}
+//					break;
+//
+//			}
+//
+//		}
+//	};
 
-			switch (v.getId()) {
-
-			case R.id.button_save: {
-				mET1.append("\nEnabled...waiting data");
-				btct1 = new BtConnectorThreaded(getApplicationContext(),
-						BT_DEVICE_1_MAC, BT_DEVICE_1_ID);
-				btct1.connect();
-			}
-				break;
-
-			case R.id.button2: {
-				if (!running) break;
-				
-				Intent myIntent = new Intent(v.getContext(),
-						TestDatabaseActivity.class);
-				startActivityForResult(myIntent, 0);
-				running = false;
-			}
-				break;
-
-			case R.id.button3: {
-
-				running = true;
-				mET1.setText("Your streches---> "+stretchCounter);
-			}
-				break;
-
-			}
-
-		}
-	};
-	
 	/**
 	 * -- END
 	 */
 
-	protected void onCreate(Bundle savedInstanceState) {
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
+		this.setContentView(R.layout.activity_main);
 		
-		/**
-		 * BT backend code
-		 * Code by Alejandro and Lucas
-		 * -- START
-		 */
-		if (D)
+		if (D) {
 			Log.d(TAG, "+++ On Create +++");
-
-		setContentView(R.layout.activity_main);
+		}
 
 		// Setup views
 		/*
-		mET1 = (EditText) findViewById(R.id.editText1);
-		tv = (TextView) findViewById(R.id.textView1);
-		tv.setText("Start workout");
-		sb = (SeekBar) findViewById(R.id.seekBar1);
-
-		mET1.setEnabled(false);
-
-		((Button) findViewById(R.id.button1))
-				.setOnClickListener(mOnClickListener);
-		((Button) findViewById(R.id.button2))// Stop
-				.setOnClickListener(mOnClickListener);
-		((Button) findViewById(R.id.button3))// Start
-				.setOnClickListener(mOnClickListener);
-		*/
+		 * mET1 = (EditText) findViewById(R.id.editText1); tv = (TextView)
+		 * findViewById(R.id.textView1); tv.setText("Start workout"); sb =
+		 * (SeekBar) findViewById(R.id.seekBar1); mET1.setEnabled(false);
+		 * ((Button) findViewById(R.id.button1))
+		 * .setOnClickListener(mOnClickListener); ((Button)
+		 * findViewById(R.id.button2))// Stop
+		 * .setOnClickListener(mOnClickListener); ((Button)
+		 * findViewById(R.id.button3))// Start
+		 * .setOnClickListener(mOnClickListener);
+		 */
 
 		// Setup broadcast receiver
-		btMultiResponseReceiver = new BtMultiResponseReceiver();
-		multiFilter = new IntentFilter(BtConnectorThreaded.BT_NEW_DATA_INTENT);
-		multiHrFilter = new IntentFilter(
-				BtConnectorPolarThreaded.BT_NEW_DATA_INTENT);
-		
+//		this.btMultiResponseReceiver = new BtMultiResponseReceiver();
+//		this.multiFilter = new IntentFilter(BtConnectorThreaded.BT_NEW_DATA_INTENT);
+//		this.multiHrFilter = new IntentFilter(BtConnectorPolarThreaded.BT_NEW_DATA_INTENT);
+
 		/**
 		 * -- END
 		 */
-		
-		setContentView(R.layout.activity_main);
-		
-		
-		//Find button//Find buttons
-		Button buttonStart = (Button) findViewById(R.id.buttonStart);
-		
-		
-		buttonStart.setOnClickListener(new View.OnClickListener()
-		{
-        	public void onClick(View v) {
-           		Intent intent = new Intent(MainActivity.this , WorkoutActivity.class);
-        		startActivity(intent);
-        		}
-        });
+
+		// setContentView(R.layout.activity_main);
+
+		// Find button//Find buttons
+		Button buttonStart = (Button) this.findViewById(R.id.buttonStart);
+
+		buttonStart.setOnClickListener(new View.OnClickListener() {// Click in
+																	// start
+																	// activity
+																	// should
+																	// connect
+																	// bt here
+
+					@Override
+					public void onClick(View v)
+					{
+						Intent intent = new Intent(MainActivity.this, WorkoutActivity.class);
+						MainActivity.this.startActivity(intent);
+					}
+				});
 	}
-	
-	
+
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.activity_main, menu);
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		this.getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
 	}
-	
-	 public boolean onOptionsItemSelected(MenuItem item) {
-         Intent intent = null;
-         switch (item.getItemId()) {
-            case R.id.menu_settings:
-               intent = new Intent(MainActivity.this,TabsActivity.class);
-               startActivity(intent);
-               return true;
-           }
-      
-      return false;
-	 }
-	 
-		private class BtMultiResponseReceiver extends BroadcastReceiver {
 
-			@Override
-			public void onReceive(Context context, Intent intent) {
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		Intent intent = null;
+		switch (item.getItemId())
+		{
+			case R.id.menu_settings:
+				intent = new Intent(MainActivity.this, TabsActivity.class);
+				this.startActivity(intent);
+				return true;
+		}
 
-				int id = 0;
-				String line = "";
+		return false;
+	}
 
-				if (intent
-						.hasExtra(BtConnectorThreaded.BT_NEW_DATA_INTENT_EXTRA_BT_DATA)) {
-					line = intent
-							.getStringExtra(BtConnectorThreaded.BT_NEW_DATA_INTENT_EXTRA_BT_DATA);
-					id = intent
-							.getIntExtra(
-									BtConnectorThreaded.BT_NEW_DATA_INTENT_EXTRA_BT_DATA_STREAM_ID,
-									0);
+	private class BtMultiResponseReceiver extends BroadcastReceiver
+	{
 
-				} else if (intent
-						.hasExtra(BtConnectorPolarThreaded.BT_NEW_DATA_INTENT_EXTRA_BT_HR_DATA)) {
-					line = ""
-							+ intent.getIntExtra(
-									BtConnectorPolarThreaded.BT_NEW_DATA_INTENT_EXTRA_BT_HR_DATA,
-									0);
-					id = intent
-							.getIntExtra(
-									BtConnectorPolarThreaded.BT_NEW_DATA_INTENT_EXTRA_BT_DATA_STREAM_ID,
-									0);
-				}
+		@Override
+		public void onReceive(Context context, Intent intent)
+		{
 
-				switch (id) {
+			int id = 0;
+			String line = "";
+
+			if (intent.hasExtra(BtConnectorThreaded.BT_NEW_DATA_INTENT_EXTRA_BT_DATA)) {
+				line = intent.getStringExtra(BtConnectorThreaded.BT_NEW_DATA_INTENT_EXTRA_BT_DATA);
+				id = intent.getIntExtra(BtConnectorThreaded.BT_NEW_DATA_INTENT_EXTRA_BT_DATA_STREAM_ID, 0);
+
+			}
+			else if (intent.hasExtra(BtConnectorPolarThreaded.BT_NEW_DATA_INTENT_EXTRA_BT_HR_DATA)) {
+				line = ""
+						+ intent.getIntExtra(BtConnectorPolarThreaded.BT_NEW_DATA_INTENT_EXTRA_BT_HR_DATA, 0);
+				id = intent.getIntExtra(BtConnectorPolarThreaded.BT_NEW_DATA_INTENT_EXTRA_BT_DATA_STREAM_ID,
+						0);
+			}
+
+			switch (id)
+			{
 
 				case BT_DEVICE_1_ID:
-					mET1_lines++;
+					MainActivity.this.mET1_lines++;
 					// mET1.append("\n" + mET1_lines + ": " + line);
 					// mET1.setText("\n" + mET1_lines + ": " + line);
-					if (running) {
-						tv.setText(this.getStrength(line));
+					if (MainActivity.this.running) {
+						MainActivity.this.tv.setText(this.getStrength(line));
 
-						sb.setProgress(Integer.parseInt(line) - 42000);
+						MainActivity.this.sb.setProgress(Integer.parseInt(line) - 42000);
 					}
 					break;
 
-				}
-
-			}
-
-			/**
-			 * 
-			 * @param value
-			 *            from the sensor
-			 * @return conversion to low,normal,hard strength
-			 */
-			private String getStrength(String value) {
-
-				int strengthBT = Integer.parseInt(value);
-				String strength = null;
-
-				if (strengthBT < 48000) {
-
-					strength = "More please";// low
-
-					workout = true;
-				}
-				if (strengthBT > 55000) {
-					strength = "Woaaah";
-
-					if (workout) {
-						stretchCounter++;
-						workout = false;
-						mET1.setText("Your streches---> "+stretchCounter);
-
-					}
-				}
-				if (strengthBT >= 48000 && strengthBT <= 55000) {
-					strength = "Okay...";
-				}
-
-				return strength;
 			}
 
 		}
-	
+
+		/**
+		 * @param value
+		 *            from the sensor
+		 * @return conversion to low,normal,hard strength
+		 */
+		private String getStrength(String value)
+		{
+
+			int strengthBT = Integer.parseInt(value);
+			String strength = null;
+
+			if (strengthBT < 48000) {
+
+				strength = "More please";// low
+
+				MainActivity.this.workout = true;
+			}
+			if (strengthBT > 55000) {
+				strength = "Woaaah";
+
+				if (MainActivity.this.workout) {
+					stretchCounter++;
+					MainActivity.this.workout = false;
+					MainActivity.this.mET1.setText("Your streches---> " + stretchCounter);
+
+				}
+			}
+			if ( ( strengthBT >= 48000 ) && ( strengthBT <= 55000 )) {
+				strength = "Okay...";
+			}
+
+			return strength;
+		}
+
+	}
+
 }
