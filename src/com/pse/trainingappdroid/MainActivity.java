@@ -192,7 +192,7 @@ public class MainActivity extends Activity
 			Log.d(TAG, "+++ On Create +++");
 		}
 
-		// Setup broadcast receiver
+		
 //		this.btMultiResponseReceiver = new BtMultiResponseReceiver();
 //		this.multiFilter = new IntentFilter(BtConnectorThreaded.BT_NEW_DATA_INTENT);
 //		this.multiHrFilter = new IntentFilter(BtConnectorPolarThreaded.BT_NEW_DATA_INTENT);

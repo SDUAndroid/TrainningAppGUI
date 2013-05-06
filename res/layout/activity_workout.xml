@@ -51,7 +51,7 @@
         android:layout_marginTop="34dp" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/textView_strenght"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/seekBar_strenght"
@@ -65,7 +65,7 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView6"
+        android:layout_below="@+id/textView_strenght"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="14dp" />
 

@@ -11,18 +11,22 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
-public class WorkoutActivity extends Activity implements OnClickListener {
+public class WorkoutActivity extends Activity implements OnClickListener
+{
 
 	private static final Boolean D = true;
 	private static final String TAG = "WorkoutActivity";
-	
+
 	public static int stretchCounter = 0;
 	private Button saveBut;
 	private SeekBar sb_strenght = null;
+	private TextView textView_strenght;
+	
 	private boolean workout = false;
 	private boolean running = false;
-	
+
 	private BtMultiResponseReceiver btMultiResponseReceiver = null;
 	private IntentFilter multiFilter = null;
 	private IntentFilter multiHrFilter = null;
@@ -33,42 +37,47 @@ public class WorkoutActivity extends Activity implements OnClickListener {
 	private BtConnectorThreaded btct1 = null, btct2 = null;
 	private BtConnectorPolarThreaded btct3 = null;
 
-
-	protected void onCreate(Bundle savedInstanceState) {
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_workout);
+		this.setContentView(R.layout.activity_workout);
 
 		this.connectStuff();
 		// Add onclick to our save button
-		saveBut = ((Button) findViewById(R.id.button_save_workout));
-		saveBut.setOnClickListener(this);
-		sb_strenght = (SeekBar) findViewById(R.id.seekBar_strenght);
-		
+		this.saveBut = ( (Button) this.findViewById(R.id.button_save_workout) );
+		this.saveBut.setOnClickListener(this);
+		this.sb_strenght = (SeekBar) this.findViewById(R.id.seekBar_strenght);
+		this.textView_strenght = (TextView) this.findViewById(R.id.textView_strenght);
+
 	}
 
 	@Override
-	public void onClick(View v) {
+	public void onClick(View v)
+	{
 		// TODO Auto-generated method stub
-		if (v==saveBut){
-			//TODO IF WORKOUT IS FINISHED! GO TO
-			Intent myIntent = new Intent(v.getContext(),
-					TestDatabaseActivity.class);
-			startActivityForResult(myIntent, 0);
+		if (v == this.saveBut) {
+			// TODO IF WORKOUT IS FINISHED! GO TO
+			Intent myIntent = new Intent(v.getContext(), TestDatabaseActivity.class);
+			this.startActivityForResult(myIntent, 0);
 		}
 	}
-	
-	private void connectStuff (){
-	
+
+	private void connectStuff()
+	{
+
+		// Setup broadcast receiver
 		this.btMultiResponseReceiver = new BtMultiResponseReceiver();
 		this.multiFilter = new IntentFilter(BtConnectorThreaded.BT_NEW_DATA_INTENT);
 		this.multiHrFilter = new IntentFilter(BtConnectorPolarThreaded.BT_NEW_DATA_INTENT);
-		
-		this.btct1 = new BtConnectorThreaded(
-				this.getApplicationContext(), BT_DEVICE_1_MAC, BT_DEVICE_1_ID);
+
+		// connect to device, flag as running workout
+		this.btct1 = new BtConnectorThreaded(this.getApplicationContext(), BT_DEVICE_1_MAC, BT_DEVICE_1_ID);
 		this.btct1.connect();
 		this.running = true;
-	
+
 	}
+
 	@Override
 	protected void onResume()
 	{
@@ -107,6 +116,7 @@ public class WorkoutActivity extends Activity implements OnClickListener {
 
 		this.unregisterReceiver(this.btMultiResponseReceiver);
 	}
+
 	private class BtMultiResponseReceiver extends BroadcastReceiver
 	{
 
@@ -132,13 +142,11 @@ public class WorkoutActivity extends Activity implements OnClickListener {
 			switch (id)
 			{
 
-				case BT_DEVICE_1_ID://Work with bt data here
-					
-					
-					
-					if (WorkoutActivity.this.running) {
-					//	this.tv.setText(this.getStrength(line));
+				case BT_DEVICE_1_ID:// Work with stretch sensor bt data here
 
+					if (WorkoutActivity.this.running) {
+						
+						WorkoutActivity.this.textView_strenght.setText(this.getStrength(line));
 						WorkoutActivity.this.sb_strenght.setProgress(Integer.parseInt(line) - 42000);
 					}
 					break;
@@ -160,24 +168,21 @@ public class WorkoutActivity extends Activity implements OnClickListener {
 
 			if (strengthBT < 48000) {
 
-				strength = "More please";// low
+				strength = "Stretch it!";// low
 
 				WorkoutActivity.this.workout = true;
 			}
 			if (strengthBT > 55000) {
-				strength = "Woaaah";
-				
-				Log.v(TAG, "MAX FORCE");
-				
+				strength = "Woaaah!!!";
+
 				if (WorkoutActivity.this.workout) {
 					stretchCounter++;
-					WorkoutActivity.this.workout = false;
-				//	WorkoutActivity.this.mET1.setText("Your streches---> " + stretchCounter);
+					WorkoutActivity.this.workout = false;					
 
 				}
 			}
 			if ( ( strengthBT >= 48000 ) && ( strengthBT <= 55000 )) {
-				strength = "Okay...";
+				strength = "Keep going!!";
 			}
 
 			return strength;
