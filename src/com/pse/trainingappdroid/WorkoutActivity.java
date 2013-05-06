@@ -17,7 +17,7 @@ public class WorkoutActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_workout);
 
 		// Add onclick to our save button
-		saveBut = ((Button) findViewById(R.id.button_save));
+		saveBut = ((Button) findViewById(R.id.button_save_workout));
 		saveBut.setOnClickListener(this);
 
 	}

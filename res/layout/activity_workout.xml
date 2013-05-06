@@ -43,7 +43,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <SeekBar
-        android:id="@+id/seekBar_threshold"
+        android:id="@+id/seekBar_strenght"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/progressBar1"
@@ -54,7 +54,7 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/seekBar_threshold"
+        android:layout_below="@+id/seekBar_strenght"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="@string/strenght"
@@ -70,7 +70,7 @@
         android:layout_marginTop="14dp" />
 
     <Button
-        android:id="@+id/button_save"
+        android:id="@+id/button_save_workout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/progressBar1"
