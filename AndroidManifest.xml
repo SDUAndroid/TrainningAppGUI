@@ -8,6 +8,9 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="16" />
 
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -22,67 +25,54 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity
             android:name="com.pse.trainingappdroid.LoginActivity"
             android:label="@string/app_name" >
         </activity>
-        
         <activity
             android:name="com.pse.trainingappdroid.RegisterActivity"
             android:label="@string/app_name" >
         </activity>
-        
         <activity
             android:name="com.pse.trainingappdroid.ForgotActivity"
             android:label="@string/app_name" >
         </activity>
-        
         <activity
             android:name="com.pse.trainingappdroid.TabsActivity"
             android:label="@string/app_name" >
         </activity>
-        
         <activity
             android:name="com.pse.trainingappdroid.TabsAchActivity"
             android:label="@string/app_name" >
         </activity>
-        
         <activity
             android:name="com.pse.trainingappdroid.TabsHistoryActivity"
             android:label="@string/app_name" >
         </activity>
-        
         <activity
             android:name="com.pse.trainingappdroid.TabsSettingsActivity"
             android:label="@string/app_name" >
         </activity>
-        
         <activity
             android:name="com.pse.trainingappdroid.TabsMeActivity"
             android:label="@string/app_name" >
         </activity>
-        
         <activity
             android:name="com.pse.trainingappdroid.WorkoutActivity"
             android:label="@string/app_name" >
         </activity>
-        
         <activity
             android:name="com.pse.trainingappdroid.MainActivity"
             android:label="@string/app_name" >
         </activity>
-        
         <activity
             android:name="com.pse.trainingappdroid.WorkoutHistoryActivity"
             android:label="@string/app_name" >
         </activity>
-
-         <activity
+        <activity
             android:name="com.pse.trainingappdroid.BarGraphActivity"
             android:label="@string/app_name" >
         </activity>
-        
     </application>
 
 </manifest>
