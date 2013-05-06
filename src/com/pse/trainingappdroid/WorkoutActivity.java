@@ -23,7 +23,7 @@ public class WorkoutActivity extends Activity implements OnClickListener
 	private Button saveBut;
 	private SeekBar sb_strenght = null;
 	private TextView textView_strenght;
-	
+
 	private boolean workout = false;
 	private boolean running = false;
 
@@ -44,9 +44,11 @@ public class WorkoutActivity extends Activity implements OnClickListener
 		this.setContentView(R.layout.activity_workout);
 
 		this.connectStuff();
-		// Add onclick to our save button
+		// Add onclick to our save button invisible!! make it visible when countdown ends
 		this.saveBut = ( (Button) this.findViewById(R.id.button_save_workout) );
 		this.saveBut.setOnClickListener(this);
+		//this.saveBut.setVisibility(View.GONE);
+		
 		this.sb_strenght = (SeekBar) this.findViewById(R.id.seekBar_strenght);
 		this.textView_strenght = (TextView) this.findViewById(R.id.textView_strenght);
 
@@ -57,9 +59,12 @@ public class WorkoutActivity extends Activity implements OnClickListener
 	{
 		// TODO Auto-generated method stub
 		if (v == this.saveBut) {
-			// TODO IF WORKOUT IS FINISHED! GO TO
-			Intent myIntent = new Intent(v.getContext(), TestDatabaseActivity.class);
-			this.startActivityForResult(myIntent, 0);
+			//IF WORKOUT IS FINISHED! GO TO
+			if (!this.workout) {
+				//this.saveBut.setVisibility(View.VISIBLE);
+				Intent myIntent = new Intent(v.getContext(), TestDatabaseActivity.class);
+				this.startActivityForResult(myIntent, 0);
+			}
 		}
 	}
 
@@ -74,6 +79,9 @@ public class WorkoutActivity extends Activity implements OnClickListener
 		// connect to device, flag as running workout
 		this.btct1 = new BtConnectorThreaded(this.getApplicationContext(), BT_DEVICE_1_MAC, BT_DEVICE_1_ID);
 		this.btct1.connect();
+
+		// Running and working instantly
+		this.workout = true;
 		this.running = true;
 
 	}
@@ -88,6 +96,7 @@ public class WorkoutActivity extends Activity implements OnClickListener
 		this.registerReceiver(this.btMultiResponseReceiver, this.multiFilter);
 		this.registerReceiver(this.btMultiResponseReceiver, this.multiHrFilter);
 	}
+
 	@Override
 	protected void onDestroy()
 	{
@@ -105,6 +114,7 @@ public class WorkoutActivity extends Activity implements OnClickListener
 			this.btct3.disconnect();
 		}
 	}
+
 	@Override
 	protected void onPause()
 
@@ -145,7 +155,7 @@ public class WorkoutActivity extends Activity implements OnClickListener
 				case BT_DEVICE_1_ID:// Work with stretch sensor bt data here
 
 					if (WorkoutActivity.this.running) {
-						
+
 						WorkoutActivity.this.textView_strenght.setText(this.getStrength(line));
 						WorkoutActivity.this.sb_strenght.setProgress(Integer.parseInt(line) - 42000);
 					}
@@ -177,7 +187,7 @@ public class WorkoutActivity extends Activity implements OnClickListener
 
 				if (WorkoutActivity.this.workout) {
 					stretchCounter++;
-					WorkoutActivity.this.workout = false;					
+					WorkoutActivity.this.workout = false;
 
 				}
 			}

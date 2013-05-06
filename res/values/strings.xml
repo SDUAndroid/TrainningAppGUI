@@ -11,7 +11,7 @@
     <string name="password">Password</string>
     <string name="keeplogin">Keep me logged in</string>
     <string name="confirmPassword">Confirm password</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="email">Email</string>
     <string name="lastworkout">Last workout</string>
     <string name="lastachievement">Last achievement</string>
@@ -29,10 +29,10 @@
     <string name="song">Song</string>
     <string name="times">Time</string>
     <string name="series">Series</string>
-    <string name="threshold">Threshold</string>
+    <string name="threshold">Difficulty threshold</string>
     <string name="start">Start activity</string>
     <string name="percent">0%</string>
-    <string name="strenght">Strenght</string>
+    <string name="strenght">Strength</string>
     <string name="date">Date</string>
     <string name="duration">Duration</string>
 
