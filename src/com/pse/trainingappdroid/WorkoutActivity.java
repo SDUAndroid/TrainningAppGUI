@@ -81,7 +81,7 @@ public class WorkoutActivity extends Activity implements OnClickListener
 	 */
 	private void setSensorValues(int difficulty_threshold)
 	{
-		int lowest_value_low = 46500;
+		int lowest_value_low = 47000;
 		int lowest_value_high = 53000;
 		int thresholdLow = difficulty_threshold*30;
 		int thresholdHigh = difficulty_threshold*40;
@@ -89,6 +89,10 @@ public class WorkoutActivity extends Activity implements OnClickListener
 		//set values
 		this.sensorLow_value = lowest_value_low+thresholdLow;
 		this.sensorHigh_value = lowest_value_high+thresholdHigh;
+		
+		if (D) {
+			Log.d(TAG, "Sensor values---"+this.sensorHigh_value+"---"+this.sensorLow_value);
+		}	
 		
 	}
 
@@ -181,7 +185,7 @@ public class WorkoutActivity extends Activity implements OnClickListener
 					if (WorkoutActivity.this.running) {
 
 						WorkoutActivity.this.textView_strenght.setText(this.getStrength(line));
-						WorkoutActivity.this.sb_strenght.setProgress(Integer.parseInt(line) - 42000);
+						WorkoutActivity.this.sb_strenght.setProgress(Integer.parseInt(line) - 43000);
 					}
 					break;
 
