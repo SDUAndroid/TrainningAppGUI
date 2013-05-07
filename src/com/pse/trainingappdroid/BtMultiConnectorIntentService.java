@@ -9,11 +9,13 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import android.annotation.TargetApi;
 import android.app.IntentService;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
+import android.os.Build;
 import android.util.Log;
 import android.widget.SlidingDrawer;
 
@@ -24,11 +26,12 @@ import android.widget.SlidingDrawer;
 
 // This is a "multi" version that takes an arbitrary number of BT mac addresses and connects, reads 1000 lines in total, and broadcast back each line associated with the ID of the device it came from.
 
+@TargetApi(Build.VERSION_CODES.GINGERBREAD_MR1)
 public class BtMultiConnectorIntentService extends IntentService {
 
 	public static final String BT_DEVICE_MAC_ARRAY = "mac_array";
 	public static final String BT_DEVICE_STREAM_ID_ARRAY = "id_array";
-	public static final String BT_NEW_DATA_INTENT = "dk.sdu.trainingapp.BT_NEW_DATA_INTENT";
+	public static final String BT_NEW_DATA_INTENT = "com.pse.trainingappdroid.BT_NEW_DATA_INTENT";
 	public static final String BT_NEW_DATA_INTENT_EXTRA_BT_DATA = "bt_data";
 	public static final String BT_NEW_DATA_INTENT_EXTRA_BT_DATA_STREAM_ID= "bt_id";
 	

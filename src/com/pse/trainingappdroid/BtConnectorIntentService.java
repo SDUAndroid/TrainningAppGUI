@@ -7,11 +7,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.UUID;
 
+import android.annotation.TargetApi;
 import android.app.IntentService;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
+import android.os.Build;
 import android.util.Log;
 
 // Connecting the socket (blocking) is handled by an intent service which processes one intent at the time.
@@ -19,11 +21,12 @@ import android.util.Log;
 
 // NB: An IntentService has _one_ worker thread that handles intents one at the time from a queue. Cannot be interrupted once queued!
 
+@TargetApi(Build.VERSION_CODES.GINGERBREAD_MR1)
 public class BtConnectorIntentService extends IntentService {
 
 	public static final String BT_DEVICE_MAC = "mac";
 	public static final String BT_DEVICE_STREAM_ID = "id";
-	public static final String BT_NEW_DATA_INTENT = "dk.sdu.trainingapp.BT_NEW_DATA_INTENT";
+	public static final String BT_NEW_DATA_INTENT = "com.pse.trainingappdroid.BT_NEW_DATA_INTENT";
 	public static final String BT_NEW_DATA_INTENT_EXTRA_BT_DATA = "bt_data";
 	public static final String BT_NEW_DATA_INTENT_EXTRA_BT_DATA_STREAM_ID= "bt_id";
 	

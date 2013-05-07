@@ -8,15 +8,18 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.UUID;
 
+import android.annotation.TargetApi;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.util.Log;
 
 // This is a use-once object because thread and socket are use-once.
 
+@TargetApi(Build.VERSION_CODES.GINGERBREAD_MR1)
 public class BtConnectorThreaded{
 
 	private BtThread mBtThread = new BtThread();
@@ -33,7 +36,7 @@ public class BtConnectorThreaded{
 	private static final Boolean D = true;
 	private static final String TAG = "BtConnectorThreaded";
 	
-	public static final String BT_NEW_DATA_INTENT = "dk.sdu.trainingapp.BT_NEW_DATA_INTENT";
+	public static final String BT_NEW_DATA_INTENT = "com.pse.trainingappdroid.BT_NEW_DATA_INTENT";
 	public static final String BT_NEW_DATA_INTENT_EXTRA_BT_DATA = "bt_data";
 	public static final String BT_NEW_DATA_INTENT_EXTRA_BT_DATA_STREAM_ID= "bt_id";
 	
