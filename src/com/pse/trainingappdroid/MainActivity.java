@@ -27,7 +27,7 @@ public class MainActivity extends Activity
 	// Config workout values
 	public static int difficulty_threshold;
 	public static int timeOfTheSeries;
-	public static int serie;
+	public static String serie;
 
 	@Override
 	protected void onStart()
@@ -115,6 +115,7 @@ public class MainActivity extends Activity
 		this.sp_serie = (Spinner) this.findViewById(R.id.spinner2);
 
 		this.sp_time.setOnItemSelectedListener(new SpinnerActivity());
+		this.sp_serie.setOnItemSelectedListener(new SpinnerActivity());
 
 	}
 
@@ -124,10 +125,21 @@ public class MainActivity extends Activity
 		@Override
 		public void onItemSelected(AdapterView<?> parent, View view, int pos, long id)
 		{
-			// An item was selected. You can retrieve the selected item using
-			MainActivity.timeOfTheSeries = Integer.parseInt(parent.getItemAtPosition(pos).toString());
-			if (D) {
-				Log.d(TAG, "+++ On ItemSelected +++"+ MainActivity.timeOfTheSeries);
+			if (parent == MainActivity.this.sp_time) {
+				// An item was selected. You can retrieve the selected item
+				// using
+				MainActivity.timeOfTheSeries = Integer.parseInt(parent.getItemAtPosition(pos).toString());
+				if (D) {
+					Log.d(TAG, "+++ On ItemSelected +++" + MainActivity.timeOfTheSeries);
+				}
+			}
+
+			if (parent == MainActivity.this.sp_serie) {
+				
+				MainActivity.serie =   parent.getItemAtPosition(pos).toString();
+				if (D) {
+					Log.d(TAG, "+++ On ItemSelected +++" + MainActivity.serie);
+				}
 			}
 		}
 
