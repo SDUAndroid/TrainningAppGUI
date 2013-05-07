@@ -52,7 +52,7 @@ public class WorkoutActivity extends Activity implements OnClickListener
 		this.setContentView(R.layout.activity_workout);
 
 		this.connectStuff();
-		// this.beginCountdown();
+		this.beginCountdown();
 
 		// use the seekbar from the main
 		this.setSensorValues(MainActivity.difficulty_threshold);
@@ -170,8 +170,7 @@ public class WorkoutActivity extends Activity implements OnClickListener
 	{
 		if (!WorkoutActivity.this.running && WorkoutActivity.this.workout) {// When
 			// connects
-			
-			
+
 			this.countdown = new CountDownTimer(20000, 1000) {
 
 				public void onTick(long millisUntilFinished)
@@ -192,7 +191,7 @@ public class WorkoutActivity extends Activity implements OnClickListener
 					// WorkoutActivity.this.saveBut.setVisibility(View.VISIBLE);
 				}
 			}.start();
-			
+
 			if (D) {
 				Log.d(TAG, "+ Countdown created +");
 			}
@@ -226,14 +225,14 @@ public class WorkoutActivity extends Activity implements OnClickListener
 
 				case BT_DEVICE_1_ID:// Work with stretch sensor bt data here
 
-					// WorkoutActivity.this.running = true;
-
-					//if (WorkoutActivity.this.workout) {
+//					 WorkoutActivity.this.workout = true;
+//
+//					if (WorkoutActivity.this.workout) {
 
 						WorkoutActivity.this.textView_strenght.setText(this.getStrength(line));
 						WorkoutActivity.this.sb_strenght.setProgress(Integer.parseInt(line) - 43000);
-
-					//}
+						WorkoutActivity.this.textView_stretches.setText(""+stretchCounter);
+//					}
 					break;
 
 			}
@@ -255,15 +254,15 @@ public class WorkoutActivity extends Activity implements OnClickListener
 
 				strength = "Stretch it!";// low
 
-				 WorkoutActivity.this.workout = true;
+				WorkoutActivity.this.workout = true;
 			}
 			if (strengthBT > WorkoutActivity.this.sensorHigh_value) {
 				strength = "Woaaah!!!";
 
 				if (WorkoutActivity.this.workout) {
 					stretchCounter++;
-					//WorkoutActivity.this.textView_stretches.setText(stretchCounter);
-					 WorkoutActivity.this.workout = false;
+
+					WorkoutActivity.this.workout = false;
 
 				}
 			}
