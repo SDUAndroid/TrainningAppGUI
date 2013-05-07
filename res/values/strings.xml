@@ -27,7 +27,7 @@
     <string name="time">00:00</string>
     <string name="playlist">Playlist</string>
     <string name="song">Song</string>
-    <string name="times">Time</string>
+    <string name="times">Time in seconds</string>
     <string name="series">Series</string>
     <string name="threshold">Difficulty threshold</string>
     <string name="start">Start activity</string>
@@ -36,14 +36,14 @@
     <string name="date">Date</string>
     <string name="duration">Duration</string>
     <string-array name="series">
-        <item>Soft pink world</item>
+        <item>Soft training</item>
         <item>Standard boy</item>
-        <item>IntEnsE 300</item>
+        <item>INTENSE 300</item>
     </string-array>
     <string-array name="timeseries">
-        <item>10´´</item>
-        <item>20´´</item>
-        <item>30´´</item>
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
     </string-array>
 
 </resources>

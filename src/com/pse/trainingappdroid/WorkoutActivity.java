@@ -60,7 +60,7 @@ public class WorkoutActivity extends Activity implements OnClickListener
 		// countdown ends
 		this.saveBut = ( (Button) this.findViewById(R.id.button_save_workout) );
 		this.saveBut.setOnClickListener(this);
-		// this.saveBut.setVisibility(View.GONE);
+		this.saveBut.setVisibility(View.GONE);
 
 		this.sb_strenght = (SeekBar) this.findViewById(R.id.seekBar_strenght);
 
@@ -171,7 +171,7 @@ public class WorkoutActivity extends Activity implements OnClickListener
 		if (!WorkoutActivity.this.running && WorkoutActivity.this.workout) {// When
 			// connects
 
-			this.countdown = new CountDownTimer(20000, 1000) {
+			this.countdown = new CountDownTimer(MainActivity.timeOfTheSeries*1000, 1000) {
 
 				public void onTick(long millisUntilFinished)
 				{
@@ -188,7 +188,7 @@ public class WorkoutActivity extends Activity implements OnClickListener
 					// STOP ALL
 					WorkoutActivity.this.running = false;
 					WorkoutActivity.this.workout = false;
-					// WorkoutActivity.this.saveBut.setVisibility(View.VISIBLE);
+					WorkoutActivity.this.saveBut.setVisibility(View.VISIBLE);
 				}
 			}.start();
 
@@ -227,7 +227,7 @@ public class WorkoutActivity extends Activity implements OnClickListener
 
 //					 WorkoutActivity.this.workout = true;
 //
-//					if (WorkoutActivity.this.workout) {
+	//			if (WorkoutActivity.this.workout) {
 
 						WorkoutActivity.this.textView_strenght.setText(this.getStrength(line));
 						WorkoutActivity.this.sb_strenght.setProgress(Integer.parseInt(line) - 43000);

@@ -8,9 +8,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.SeekBar;
-
+import android.widget.Spinner;
 
 public class MainActivity extends Activity
 {
@@ -20,10 +22,11 @@ public class MainActivity extends Activity
 
 	private Button butStart = null;
 	private SeekBar sb_threshold = null;
-	
-	//Config workout values 
+	private Spinner sp_time, sp_serie;
+
+	// Config workout values
 	public static int difficulty_threshold;
-	public static int timeseries;
+	public static int timeOfTheSeries;
 	public static int serie;
 
 	@Override
@@ -73,13 +76,13 @@ public class MainActivity extends Activity
 			{
 			// Start workout connect to device instantly
 				case R.id.buttonStartWorkout: {
-							
-					//Lets try to move the connexion to the workout activity
-					//Note to the past: good idea
-					MainActivity.difficulty_threshold = MainActivity.this.sb_threshold.getProgress();//Yeah
+
+					// Lets try to move the connexion to the workout activity
+					// Note to the past: good idea
+					MainActivity.difficulty_threshold = MainActivity.this.sb_threshold.getProgress();// Yeah
 					if (D) {
-						Log.d(TAG, "Click start activity-threshold--> "+MainActivity.difficulty_threshold );
-					}		
+						Log.d(TAG, "Click start activity-threshold--> " + MainActivity.difficulty_threshold);
+					}
 					Intent intent = new Intent(MainActivity.this, WorkoutActivity.class);
 					MainActivity.this.startActivity(intent);
 				}
@@ -100,13 +103,39 @@ public class MainActivity extends Activity
 			Log.d(TAG, "+++ On Create +++");
 		}
 
-//		// Find views
-		butStart = (Button) this.findViewById(R.id.buttonStartWorkout);
-		butStart.setOnClickListener(this.mOnClickListener);
-		
-		sb_threshold= (SeekBar) this.findViewById(R.id.seekBar_threshold);
-		sb_threshold.setProgress(50);//Medium level default		
+		// // Find views
+		this.butStart = (Button) this.findViewById(R.id.buttonStartWorkout);
+		this.butStart.setOnClickListener(this.mOnClickListener);
+
+		this.sb_threshold = (SeekBar) this.findViewById(R.id.seekBar_threshold);
+		this.sb_threshold.setProgress(50);// Medium level default
 		difficulty_threshold = 50;
+
+		this.sp_time = (Spinner) this.findViewById(R.id.spinner1);
+		this.sp_serie = (Spinner) this.findViewById(R.id.spinner2);
+
+		this.sp_time.setOnItemSelectedListener(new SpinnerActivity());
+
+	}
+
+	public class SpinnerActivity extends Activity implements OnItemSelectedListener
+	{
+
+		@Override
+		public void onItemSelected(AdapterView<?> parent, View view, int pos, long id)
+		{
+			// An item was selected. You can retrieve the selected item using
+			MainActivity.timeOfTheSeries = Integer.parseInt(parent.getItemAtPosition(pos).toString());
+			if (D) {
+				Log.d(TAG, "+++ On ItemSelected +++"+ MainActivity.timeOfTheSeries);
+			}
+		}
+
+		@Override
+		public void onNothingSelected(AdapterView<?> parent)
+		{
+			// Another interface callback
+		}
 	}
 
 	@Override
