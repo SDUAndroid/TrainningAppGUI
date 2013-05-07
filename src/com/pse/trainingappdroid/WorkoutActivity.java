@@ -19,6 +19,9 @@ public class WorkoutActivity extends Activity implements OnClickListener
 	private static final Boolean D = true;
 	private static final String TAG = "WorkoutActivity";
 
+	private int sensorLow_value;
+	private int sensorHigh_value;
+
 	public static int stretchCounter = 0;
 	private Button saveBut;
 	private SeekBar sb_strenght = null;
@@ -44,11 +47,14 @@ public class WorkoutActivity extends Activity implements OnClickListener
 		this.setContentView(R.layout.activity_workout);
 
 		this.connectStuff();
-		// Add onclick to our save button invisible!! make it visible when countdown ends
+		//use the seekbar from the main
+		this.setSensorValues(MainActivity.difficulty_threshold);
+		// Add onclick to our save button invisible!! make it visible when
+		// countdown ends
 		this.saveBut = ( (Button) this.findViewById(R.id.button_save_workout) );
 		this.saveBut.setOnClickListener(this);
-		//this.saveBut.setVisibility(View.GONE);
-		
+		// this.saveBut.setVisibility(View.GONE);
+
 		this.sb_strenght = (SeekBar) this.findViewById(R.id.seekBar_strenght);
 		this.textView_strenght = (TextView) this.findViewById(R.id.textView_strenght);
 
@@ -59,13 +65,31 @@ public class WorkoutActivity extends Activity implements OnClickListener
 	{
 		// TODO Auto-generated method stub
 		if (v == this.saveBut) {
-			//IF WORKOUT IS FINISHED! GO TO
+			// IF WORKOUT IS FINISHED! GO TO
 			if (!this.workout) {
-				//this.saveBut.setVisibility(View.VISIBLE);
+				// this.saveBut.setVisibility(View.VISIBLE);
 				Intent myIntent = new Intent(v.getContext(), TestDatabaseActivity.class);
 				this.startActivityForResult(myIntent, 0);
 			}
 		}
+	}
+
+	/**
+	 * Set the strength value with the threshold 0-100
+	 * 
+	 * @param difficulty_threshold
+	 */
+	private void setSensorValues(int difficulty_threshold)
+	{
+		int lowest_value_low = 46500;
+		int lowest_value_high = 53000;
+		int thresholdLow = difficulty_threshold*30;
+		int thresholdHigh = difficulty_threshold*40;
+		
+		//set values
+		this.sensorLow_value = lowest_value_low+thresholdLow;
+		this.sensorHigh_value = lowest_value_high+thresholdHigh;
+		
 	}
 
 	private void connectStuff()
@@ -166,8 +190,7 @@ public class WorkoutActivity extends Activity implements OnClickListener
 		}
 
 		/**
-		 * @param value
-		 *            from the sensor
+		 * @param value from the sensor
 		 * @return conversion to low,normal,hard strength
 		 */
 		private String getStrength(String value)
@@ -175,14 +198,14 @@ public class WorkoutActivity extends Activity implements OnClickListener
 
 			int strengthBT = Integer.parseInt(value);
 			String strength = null;
-
-			if (strengthBT < 48000) {
+			//48000 //55000
+			if (strengthBT < WorkoutActivity.this.sensorLow_value) {
 
 				strength = "Stretch it!";// low
 
 				WorkoutActivity.this.workout = true;
 			}
-			if (strengthBT > 55000) {
+			if (strengthBT > WorkoutActivity.this.sensorHigh_value) {
 				strength = "Woaaah!!!";
 
 				if (WorkoutActivity.this.workout) {
@@ -191,7 +214,7 @@ public class WorkoutActivity extends Activity implements OnClickListener
 
 				}
 			}
-			if ( ( strengthBT >= 48000 ) && ( strengthBT <= 55000 )) {
+			if ( ( strengthBT >= WorkoutActivity.this.sensorLow_value ) && ( strengthBT <= WorkoutActivity.this.sensorHigh_value )) {
 				strength = "Keep going!!";
 			}
 
