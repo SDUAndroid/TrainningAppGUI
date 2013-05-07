@@ -32,6 +32,7 @@
           android:layout_below="@+id/textView3"
           android:layout_centerHorizontal="true"
           android:layout_marginTop="0dp"
+          android:entries="@array/series"
           android:prompt="@string/series" />
 
       <TextView
@@ -51,6 +52,7 @@
           android:layout_below="@+id/textView_time"
           android:layout_centerHorizontal="true"
           android:layout_marginTop="0dp"
+          android:entries="@array/timeseries"
           android:prompt="@string/times" />
 
       <TextView

@@ -19,10 +19,12 @@ public class MainActivity extends Activity
 	private static final String TAG = "MainActivity";
 
 	private Button butStart = null;
-
 	private SeekBar sb_threshold = null;
 	
+	//Config workout values 
 	public static int difficulty_threshold;
+	public static int timeseries;
+	public static int serie;
 
 	@Override
 	protected void onStart()

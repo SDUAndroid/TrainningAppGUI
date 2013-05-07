@@ -35,5 +35,15 @@
     <string name="strenght">Wait a moment</string>
     <string name="date">Date</string>
     <string name="duration">Duration</string>
+    <string-array name="series">
+        <item>Soft pink world</item>
+        <item>Standard boy</item>
+        <item>IntEnsE 300</item>
+    </string-array>
+    <string-array name="timeseries">
+        <item>10´´</item>
+        <item>20´´</item>
+        <item>30´´</item>
+    </string-array>
 
 </resources>
