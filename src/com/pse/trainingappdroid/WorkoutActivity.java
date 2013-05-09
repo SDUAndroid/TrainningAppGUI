@@ -20,6 +20,9 @@ public class WorkoutActivity extends Activity implements OnClickListener
 	private static final Boolean D = true;
 	private static final String TAG = "WorkoutActivity";
 
+	private static final int LOW_VALUE = 47800;
+	private static final int MED_VALUE = 53800;
+	
 	private int sensorLow_value;
 	private int sensorHigh_value;
 
@@ -52,7 +55,7 @@ public class WorkoutActivity extends Activity implements OnClickListener
 		this.setContentView(R.layout.activity_workout);
 
 		this.connectStuff();
-		this.beginCountdown();
+		// this.beginCountdown();
 
 		// use the seekbar from the main
 		this.setSensorValues(MainActivity.difficulty_threshold);
@@ -133,8 +136,8 @@ public class WorkoutActivity extends Activity implements OnClickListener
 	 */
 	private void setSensorValues(int difficulty_threshold)
 	{
-		int lowest_value_low = 47000;
-		int lowest_value_high = 53000;
+		int lowest_value_low = LOW_VALUE;
+		int lowest_value_high = MED_VALUE;
 		int thresholdLow = difficulty_threshold * 30;
 		int thresholdHigh = difficulty_threshold * 40;
 
@@ -170,8 +173,10 @@ public class WorkoutActivity extends Activity implements OnClickListener
 	{
 		if (!WorkoutActivity.this.running && WorkoutActivity.this.workout) {// When
 			// connects
-
-			this.countdown = new CountDownTimer(MainActivity.timeOfTheSeries*1000, 1000) {
+			
+			WorkoutActivity.this.running = true;
+			
+			this.countdown = new CountDownTimer(MainActivity.timeOfTheSeries * 1000, 1000) {
 
 				public void onTick(long millisUntilFinished)
 				{
@@ -186,7 +191,7 @@ public class WorkoutActivity extends Activity implements OnClickListener
 						Log.d(TAG, "+ On FINISH +");
 					}
 					// STOP ALL
-					WorkoutActivity.this.running = false;
+				//	WorkoutActivity.this.running = false;
 					WorkoutActivity.this.workout = false;
 					WorkoutActivity.this.saveBut.setVisibility(View.VISIBLE);
 				}
@@ -225,14 +230,15 @@ public class WorkoutActivity extends Activity implements OnClickListener
 
 				case BT_DEVICE_1_ID:// Work with stretch sensor bt data here
 
-//					 WorkoutActivity.this.workout = true;
-//
-	//			if (WorkoutActivity.this.workout) {
+					WorkoutActivity.this.beginCountdown();
+					// WorkoutActivity.this.workout = true;
+					//
+					// if (WorkoutActivity.this.workout) {
 
-						WorkoutActivity.this.textView_strenght.setText(this.getStrength(line));
-						WorkoutActivity.this.sb_strenght.setProgress(Integer.parseInt(line) - 43000);
-						WorkoutActivity.this.textView_stretches.setText(""+stretchCounter);
-//					}
+					WorkoutActivity.this.textView_strenght.setText(this.getStrength(line));
+					WorkoutActivity.this.sb_strenght.setProgress(Integer.parseInt(line) - 43000);
+					WorkoutActivity.this.textView_stretches.setText("" + stretchCounter);
+					// }
 					break;
 
 			}
