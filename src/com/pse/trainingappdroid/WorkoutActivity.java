@@ -20,8 +20,8 @@ public class WorkoutActivity extends Activity implements OnClickListener
 	private static final Boolean D = true;
 	private static final String TAG = "WorkoutActivity";
 
-	private static final int LOW_VALUE = 47800;
-	private static final int MED_VALUE = 53800;
+	private static final int LOW_VALUE = 46800;
+	private static final int MED_VALUE = 52800;
 
 	private int sensorLow_value;
 	private int sensorHigh_value;
@@ -48,12 +48,15 @@ public class WorkoutActivity extends Activity implements OnClickListener
 	private BtConnectorThreaded btct1 = null, btct2 = null;
 	private BtConnectorPolarThreaded btct3 = null;
 
+	private int seriesCounter;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_workout);
 
+		this.seriesCounter = 0;
 		this.connectStuff();
 		// this.beginCountdown();
 
@@ -77,6 +80,7 @@ public class WorkoutActivity extends Activity implements OnClickListener
 	@Override
 	protected void onResume()
 	{
+		this.seriesCounter = 0;
 		super.onResume();
 		if (D) {
 			Log.d(TAG, "+ On Resume +");
@@ -187,6 +191,8 @@ public class WorkoutActivity extends Activity implements OnClickListener
 				public void onFinish()
 				{
 					WorkoutActivity.this.textView_time.setText("0");
+					seriesCounter++;
+
 					if (D) {
 						Log.d(TAG, "+ On FINISH + " + MainActivity.serie);
 					}
@@ -194,21 +200,78 @@ public class WorkoutActivity extends Activity implements OnClickListener
 					if (MainActivity.serie.equalsIgnoreCase("Soft training")) {// Just
 																				// 1
 																				// repeat
-						// WorkoutActivity.this.running = false;
-
+						WorkoutActivity.this.saveBut.setVisibility(View.VISIBLE);
 					}
-					if (MainActivity.serie.equalsIgnoreCase("Standard boy")) {// 2
-																				// repeat
+					if (MainActivity.serie.equalsIgnoreCase("Standard boy") && seriesCounter < 2) {// 2
 
-						WorkoutActivity.this.running = false;
+						textView_strenght.setText("Have a small break");
+						// repeat
+						CountDownTimer countdown1 = new CountDownTimer(5000, 1000) {
+
+							public void onTick(long millisUntilFinished)
+							{
+								// WorkoutActivity.this.textView_time.setText(""
+								// + millisUntilFinished / 1000);
+								if (D) {
+									Log.d(TAG, "- On tick -");
+								}
+							}
+
+							public void onFinish()
+							{
+								WorkoutActivity.this.running = false;
+
+								WorkoutActivity.this.textView_time.setText("" + MainActivity.timeOfTheSeries);
+
+								if (D) {
+									Log.d(TAG, "+ On FINISH + " + MainActivity.serie
+											+ WorkoutActivity.this.running);
+								}
+							}
+
+						};
+
+						countdown1.start();
 					}
-					if (MainActivity.serie.equalsIgnoreCase("INTENSE 300")) {// 3
+					else if (MainActivity.serie.equalsIgnoreCase("Standard boy")) {
+						WorkoutActivity.this.saveBut.setVisibility(View.VISIBLE);
+					}
+					if (MainActivity.serie.equalsIgnoreCase("INTENSE 300")&& seriesCounter < 3) {// 3
 																				// repeat
-						WorkoutActivity.this.running = false;
+						textView_strenght.setText("Have a small break");
+						// repeat
+						CountDownTimer countdown2 = new CountDownTimer(6000, 1000) {
+
+							public void onTick(long millisUntilFinished)
+							{
+								// WorkoutActivity.this.textView_time.setText(""
+								// + millisUntilFinished / 1000);
+								if (D) {
+									Log.d(TAG, "- On tick -");
+								}
+							}
+
+							public void onFinish()
+							{
+								WorkoutActivity.this.running = false;
+
+								WorkoutActivity.this.textView_time.setText("" + MainActivity.timeOfTheSeries);
+
+								if (D) {
+									Log.d(TAG, "+ On FINISH + " + seriesCounter);
+								}
+							}
+
+						};
+
+						countdown2.start();
+					}
+					else if (MainActivity.serie.equalsIgnoreCase("INTENSE 300")) {
+						WorkoutActivity.this.saveBut.setVisibility(View.VISIBLE);
 					}
 
 					// WorkoutActivity.this.workout = false;
-					WorkoutActivity.this.saveBut.setVisibility(View.VISIBLE);
+
 				}
 			}.start();
 
@@ -248,16 +311,15 @@ public class WorkoutActivity extends Activity implements OnClickListener
 					WorkoutActivity.this.beginCountdown();
 					// WorkoutActivity.this.workout = true;
 					//
-					try{
-				if(Integer.parseInt(WorkoutActivity.this.textView_time.getText().toString()) > 0) {
+					try {
+						if (Integer.parseInt(WorkoutActivity.this.textView_time.getText().toString()) > 0) {
 
-						WorkoutActivity.this.textView_strenght.setText(this.getStrength(line));
-						WorkoutActivity.this.sb_strenght.setProgress(Integer.parseInt(line) - 43000);
-						WorkoutActivity.this.textView_stretches.setText("" + stretchCounter);
-				}
-				
-				}
-					catch(NumberFormatException e){
+							WorkoutActivity.this.textView_strenght.setText(this.getStrength(line));
+							WorkoutActivity.this.sb_strenght.setProgress(Integer.parseInt(line) - 43000);
+							WorkoutActivity.this.textView_stretches.setText("" + stretchCounter);
+						}
+
+					} catch (NumberFormatException e) {
 						e.printStackTrace();
 					}
 					break;

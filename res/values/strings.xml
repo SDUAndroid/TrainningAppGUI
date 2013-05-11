@@ -41,6 +41,7 @@
         <item>INTENSE 300</item>
     </string-array>
     <string-array name="timeseries">
+        <item>3</item>
         <item>10</item>
         <item>20</item>
         <item>30</item>
