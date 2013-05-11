@@ -24,7 +24,7 @@
     <string name="syncnow">Synchronize now</string>
     <string name="persnow">Personal data</string>
     <string name="removeinfo">Remove info</string>
-    <string name="time">00:00</string>
+    <string name="time">0</string>
     <string name="playlist">Playlist</string>
     <string name="song">Song</string>
     <string name="times">Time in seconds</string>

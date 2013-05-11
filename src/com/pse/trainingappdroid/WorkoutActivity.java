@@ -22,7 +22,7 @@ public class WorkoutActivity extends Activity implements OnClickListener
 
 	private static final int LOW_VALUE = 47800;
 	private static final int MED_VALUE = 53800;
-	
+
 	private int sensorLow_value;
 	private int sensorHigh_value;
 
@@ -173,9 +173,9 @@ public class WorkoutActivity extends Activity implements OnClickListener
 	{
 		if (!WorkoutActivity.this.running && WorkoutActivity.this.workout) {// When
 			// connects
-			
+
 			WorkoutActivity.this.running = true;
-			
+
 			this.countdown = new CountDownTimer(MainActivity.timeOfTheSeries * 1000, 1000) {
 
 				public void onTick(long millisUntilFinished)
@@ -188,11 +188,26 @@ public class WorkoutActivity extends Activity implements OnClickListener
 				{
 					WorkoutActivity.this.textView_time.setText("0");
 					if (D) {
-						Log.d(TAG, "+ On FINISH +");
+						Log.d(TAG, "+ On FINISH + " + MainActivity.serie);
 					}
 					// STOP ALL
-				//	WorkoutActivity.this.running = false;
-					WorkoutActivity.this.workout = false;
+					if (MainActivity.serie.equalsIgnoreCase("Soft training")) {// Just
+																				// 1
+																				// repeat
+						// WorkoutActivity.this.running = false;
+
+					}
+					if (MainActivity.serie.equalsIgnoreCase("Standard boy")) {// 2
+																				// repeat
+
+						WorkoutActivity.this.running = false;
+					}
+					if (MainActivity.serie.equalsIgnoreCase("INTENSE 300")) {// 3
+																				// repeat
+						WorkoutActivity.this.running = false;
+					}
+
+					// WorkoutActivity.this.workout = false;
 					WorkoutActivity.this.saveBut.setVisibility(View.VISIBLE);
 				}
 			}.start();
@@ -233,12 +248,18 @@ public class WorkoutActivity extends Activity implements OnClickListener
 					WorkoutActivity.this.beginCountdown();
 					// WorkoutActivity.this.workout = true;
 					//
-					// if (WorkoutActivity.this.workout) {
+					try{
+				if(Integer.parseInt(WorkoutActivity.this.textView_time.getText().toString()) > 0) {
 
-					WorkoutActivity.this.textView_strenght.setText(this.getStrength(line));
-					WorkoutActivity.this.sb_strenght.setProgress(Integer.parseInt(line) - 43000);
-					WorkoutActivity.this.textView_stretches.setText("" + stretchCounter);
-					// }
+						WorkoutActivity.this.textView_strenght.setText(this.getStrength(line));
+						WorkoutActivity.this.sb_strenght.setProgress(Integer.parseInt(line) - 43000);
+						WorkoutActivity.this.textView_stretches.setText("" + stretchCounter);
+				}
+				
+				}
+					catch(NumberFormatException e){
+						e.printStackTrace();
+					}
 					break;
 
 			}
