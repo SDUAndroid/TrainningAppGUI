@@ -11,7 +11,7 @@
     <string name="password">Password</string>
     <string name="keeplogin">Keep me logged in</string>
     <string name="confirmPassword">Confirm password</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="email">Email</string>
     <string name="lastworkout">Last workout</string>
     <string name="lastachievement">Last achievement</string>
@@ -24,16 +24,30 @@
     <string name="syncnow">Synchronize now</string>
     <string name="persnow">Personal data</string>
     <string name="removeinfo">Remove info</string>
-    <string name="time">00:00</string>
+    <string name="time">0</string>
     <string name="playlist">Playlist</string>
     <string name="song">Song</string>
-    <string name="times">Time</string>
+    <string name="times">Time in seconds</string>
     <string name="series">Series</string>
-    <string name="threshold">Threshold</string>
+    <string name="threshold">Difficulty threshold</string>
     <string name="start">Start activity</string>
     <string name="percent">0%</string>
-    <string name="strenght">Strenght</string>
+    <string name="strenght">Get ready!!</string>
     <string name="date">Date</string>
     <string name="duration">Duration</string>
+    <string-array name="series">
+        <item>Soft training</item>
+        <item>Standard boy</item>
+        <item>INTENSE 300</item>
+    </string-array>
+    <string-array name="timeseries">
+        <item>3</item>
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
+        <item>60</item>
+    </string-array>
 
 </resources>

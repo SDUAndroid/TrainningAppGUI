@@ -6,20 +6,12 @@
     android:orientation="vertical"
     android:background="#FFFFFF" >
 
-      <Button
-          android:id="@+id/buttonStart"
-          android:layout_width="200dp"
-          android:layout_height="42dp"
-		  android:layout_below="@+id/seekBar1"
-          android:layout_centerHorizontal="true"
-          android:layout_marginTop="20dp"
-          android:text="@string/start" />
-
       <SeekBar
-          android:id="@+id/seekBar1"
+          android:id="@+id/seekBar_threshold"
           android:layout_width="200dp"
           android:layout_height="wrap_content"
           android:layout_below="@+id/textView1"
+          android:max="100"
           android:layout_centerHorizontal="true"
           android:layout_marginTop="10dp" />
 
@@ -27,29 +19,10 @@
           android:id="@+id/textView1"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_below="@+id/spinner3"
-          android:layout_centerHorizontal="true"
-          android:text="@string/threshold"
-          android:layout_marginTop="20dp"
-          android:textAppearance="?android:attr/textAppearanceLarge" />
-
-      <Spinner
-          android:id="@+id/spinner3"
-           android:layout_width="200dp"
-          android:layout_height="50dp"
-          android:layout_below="@+id/textView4"
-          android:layout_centerHorizontal="true"
-          android:layout_marginTop="0dp"
-          android:prompt="@string/playlist" />
-
-      <TextView
-          android:id="@+id/textView4"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_centerHorizontal="true"
           android:layout_below="@+id/spinner2"
-          android:layout_marginTop="25dp"
-          android:text="@string/playlist"
+          android:layout_centerHorizontal="true"
+          android:layout_marginTop="20dp"
+          android:text="@string/threshold"
           android:textAppearance="?android:attr/textAppearanceLarge" />
 
       <Spinner
@@ -59,6 +32,7 @@
           android:layout_below="@+id/textView3"
           android:layout_centerHorizontal="true"
           android:layout_marginTop="0dp"
+          android:entries="@array/series"
           android:prompt="@string/series" />
 
       <TextView
@@ -75,18 +49,28 @@
           android:id="@+id/spinner1"
           android:layout_width="200dp"
           android:layout_height="50dp"
-          android:layout_below="@+id/textView2"
+          android:layout_below="@+id/textView_time"
           android:layout_centerHorizontal="true"
           android:layout_marginTop="0dp"
+          android:entries="@array/timeseries"
           android:prompt="@string/times" />
 
       <TextView
-          android:id="@+id/textView2"
+          android:id="@+id/textView_time"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_centerHorizontal="true"
           android:layout_marginTop="40dp"
           android:text="@string/times"
           android:textAppearance="?android:attr/textAppearanceLarge" />
+
+      <Button
+          android:id="@+id/buttonStartWorkout"
+          android:layout_width="200dp"
+          android:layout_height="42dp"
+          android:layout_alignLeft="@+id/seekBar_threshold"
+          android:layout_below="@+id/seekBar_threshold"
+          android:layout_marginTop="54dp"
+          android:text="@string/start" />
         
 </RelativeLayout>

@@ -3,8 +3,8 @@
     android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#FFFFFF" >
+    android:background="#FFFaFF"
+    android:orientation="vertical" >
 
     <RelativeLayout
         android:id="@+id/relativeLayout2"
@@ -21,19 +21,19 @@
             android:src="@drawable/circle" />
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/textView_countdown"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="20"
+            android:text="0"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#FFFFFF"
             android:textSize="75dp" />
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/relativeLayout2"
@@ -42,60 +42,51 @@
         android:text="@string/time"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:text="@string/playlist"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView3"
-        android:layout_centerHorizontal="true"
-        android:text="@string/song"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView4"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="@string/percent"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
     <SeekBar
-        android:id="@+id/seekBar1"
+        android:id="@+id/seekBar_strenght"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/progressBar1"
+        android:layout_below="@+id/textView_time"
+        android:max="23520"
+        android:layout_marginTop="34dp" />
+
+    <TextView
+        android:id="@+id/textView_strenght"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/seekBar_strenght"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/textView5"
-        android:layout_marginTop="0dp" />
+        android:layout_marginTop="20dp"
+        android:text="@string/strenght"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ProgressBar
         android:id="@+id/progressBar1"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView6"
+        android:layout_below="@+id/textView_strenght"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="0dp" />
+        android:layout_marginTop="14dp" />
 
-    <TextView
-        android:id="@+id/textView6"
+    <Button
+        android:id="@+id/button_save_workout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/seekBar1"
+        android:layout_below="@+id/progressBar1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="@string/strenght"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_marginTop="15dp"
+        android:text="Save your workout" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView_time"
+        android:layout_alignBottom="@+id/textView_time"
+        android:layout_alignLeft="@+id/seekBar_strenght"
+        android:text="Time left"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>
