@@ -14,7 +14,7 @@ public class LoadingActivity extends Activity {
 	//Déclarations 
 	TextView loading;
 	ProgressBar loadingProgressBar;
-	int loadingProgress = 0;
+	int loadingProgress = 100;
 	
 	
     public void onCreate(Bundle savedInstanceState) {
