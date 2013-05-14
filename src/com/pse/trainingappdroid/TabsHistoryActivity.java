@@ -1,5 +1,6 @@
 package com.pse.trainingappdroid;
 
+import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,23 +12,37 @@ import android.widget.CheckedTextView;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class TabsHistoryActivity extends Activity {
-	
+public class TabsHistoryActivity extends Activity
+{
+
 	CheckedTextView date;
-	
-	
-	
+
+	private void checkRecords()
+	{
+//		CountersDataSource datasource;
+//		datasource = new CountersDataSource(this);
+//		datasource.open();
+//
+//		List<Counter> values = datasource.getAllCounters();
+	}
+
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tab_history);
 		
-		
+		CountersDataSource datasource;
+		datasource = new CountersDataSource(this);
+		datasource.open();
+
+		List<Counter> values = datasource.getAllCounters();
+	//___
 		ListView list = (ListView)findViewById(R.id.maliste);
-		ArrayAdapter<String> tableau = new ArrayAdapter<String>(
-		list.getContext(), R.layout.maliste);
-		for (int i=0; i<40; i++) {
-		tableau.add("coucou " + i);
-		}
+		ArrayAdapter<Counter> tableau = new ArrayAdapter<Counter>(
+		list.getContext(), R.layout.maliste, values);
+//		for (int i=0; i<40; i++) {
+//		tableau.add("coucou " + i);
+//		}
+		
 		list.setAdapter(tableau);
 		
 		
@@ -50,11 +65,5 @@ public class TabsHistoryActivity extends Activity {
 		
 		
 	}
-	
-	
-	
-		
-	
-	
 
 }
