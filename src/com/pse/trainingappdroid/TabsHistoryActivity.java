@@ -17,15 +17,8 @@ public class TabsHistoryActivity extends Activity
 
 	CheckedTextView date;
 
-	private void checkRecords()
-	{
-//		CountersDataSource datasource;
-//		datasource = new CountersDataSource(this);
-//		datasource.open();
-//
-//		List<Counter> values = datasource.getAllCounters();
-	}
-
+	public static List<Counter> listOfCounters;
+	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tab_history);
@@ -34,11 +27,16 @@ public class TabsHistoryActivity extends Activity
 		datasource = new CountersDataSource(this);
 		datasource.open();
 
-		List<Counter> values = datasource.getAllCounters();
+		listOfCounters = datasource.getAllCounters();
+		
 	//___
 		ListView list = (ListView)findViewById(R.id.maliste);
 		ArrayAdapter<Counter> tableau = new ArrayAdapter<Counter>(
-		list.getContext(), R.layout.maliste, values);
+		list.getContext(), R.layout.maliste, listOfCounters);
+		
+//		for (int i = 0; i<list.getCount();i++){
+//			tableau.add(new Counter(1,""));
+//		}
 //		for (int i=0; i<40; i++) {
 //		tableau.add("coucou " + i);
 //		}
