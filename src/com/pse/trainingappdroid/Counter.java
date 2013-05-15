@@ -20,13 +20,13 @@ public class Counter {
 		return maxCount;
 	}
 
-	public void setMaxCounter(int comment) {
-		this.maxCount = comment;
+	public void setMaxCounter(int counter) {
+		this.maxCount = counter;
 	}
 
 	// Will be used by the ArrayAdapter in the ListView
 	@Override
 	public String toString() {
-		return maxCount+"";
+		return "In your "+id+" try you did--> "+maxCount+"";
 	}
 }
