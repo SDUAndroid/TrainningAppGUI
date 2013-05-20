@@ -20,8 +20,8 @@ public class WorkoutActivity extends Activity implements OnClickListener
 	private static final Boolean D = true;
 	private static final String TAG = "WorkoutActivity";
 
-	private static final int LOW_VALUE = 46800;
-	private static final int MED_VALUE = 52800;
+	private static final int LOW_VALUE = 51500;//46800
+	private static final int MED_VALUE = 57500;//52800
 
 	private int sensorLow_value;
 	private int sensorHigh_value;
@@ -93,6 +93,7 @@ public class WorkoutActivity extends Activity implements OnClickListener
 	protected void onDestroy()
 	{
 		super.onDestroy();
+		WorkoutActivity.stretchCounter = 0;
 		if (D) {
 			Log.d(TAG, "--- On Destroy ---");
 		}
@@ -124,12 +125,10 @@ public class WorkoutActivity extends Activity implements OnClickListener
 	{
 		// TODO Auto-generated method stub
 		if (v == this.saveBut) {
-			// IF WORKOUT IS FINISHED! GO TO
-			// if (!this.workout) {
-			//
+			
 			Intent myIntent = new Intent(v.getContext(), TestDatabaseActivity.class);
 			this.startActivityForResult(myIntent, 0);
-			// }
+			
 		}
 	}
 
@@ -315,8 +314,11 @@ public class WorkoutActivity extends Activity implements OnClickListener
 						if (Integer.parseInt(WorkoutActivity.this.textView_time.getText().toString()) > 0) {
 
 							WorkoutActivity.this.textView_strenght.setText(this.getStrength(line));
-							WorkoutActivity.this.sb_strenght.setProgress(Integer.parseInt(line) - 43000);
+							WorkoutActivity.this.sb_strenght.setProgress(Integer.parseInt(line) - 44500);//43000
 							WorkoutActivity.this.textView_stretches.setText("" + stretchCounter);
+							if (D) {
+								Log.d(TAG, "Sensor on the go values---" + line);
+							}
 						}
 
 					} catch (NumberFormatException e) {
