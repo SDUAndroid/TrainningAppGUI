@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -19,7 +20,7 @@ public class WorkoutActivity extends Activity implements OnClickListener
 
 	private static final Boolean D = true;
 	private static final String TAG = "WorkoutActivity";
-
+	private static final int REST_TIME = 10000;
 	private static final int LOW_VALUE = 51500;//46800
 	private static final int MED_VALUE = 57500;//52800
 
@@ -49,6 +50,8 @@ public class WorkoutActivity extends Activity implements OnClickListener
 	private BtConnectorPolarThreaded btct3 = null;
 
 	private int seriesCounter;
+	private MediaPlayer mp = null;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -73,6 +76,9 @@ public class WorkoutActivity extends Activity implements OnClickListener
 		this.textView_strenght = (TextView) this.findViewById(R.id.textView_strenght);
 		this.textView_stretches = (TextView) this.findViewById(R.id.textView_countdown);
 		this.textView_time = (TextView) this.findViewById(R.id.textView_time);
+		
+		this.mp = MediaPlayer.create(this, R.raw.bip);
+
 
 	}
 
@@ -178,6 +184,7 @@ public class WorkoutActivity extends Activity implements OnClickListener
 			// connects
 
 			WorkoutActivity.this.running = true;
+			this.mp.start();
 
 			this.countdown = new CountDownTimer(MainActivity.timeOfTheSeries * 1000, 1000) {
 
@@ -203,14 +210,14 @@ public class WorkoutActivity extends Activity implements OnClickListener
 					}
 					if (MainActivity.serie.equalsIgnoreCase("Standard boy") && seriesCounter < 2) {// 2
 
-						textView_strenght.setText("Have a small break");
+						//textView_strenght.setText("Have a small break");
+						
 						// repeat
-						CountDownTimer countdown1 = new CountDownTimer(5000, 1000) {
+						CountDownTimer countdown1 = new CountDownTimer(REST_TIME, 1000) {
 
 							public void onTick(long millisUntilFinished)
 							{
-								// WorkoutActivity.this.textView_time.setText(""
-								// + millisUntilFinished / 1000);
+								textView_strenght.setText("Have a small break "+millisUntilFinished/1000+"'' left" );
 								if (D) {
 									Log.d(TAG, "- On tick -");
 								}
@@ -219,7 +226,7 @@ public class WorkoutActivity extends Activity implements OnClickListener
 							public void onFinish()
 							{
 								WorkoutActivity.this.running = false;
-
+								mp.start();
 								WorkoutActivity.this.textView_time.setText("" + MainActivity.timeOfTheSeries);
 
 								if (D) {
@@ -237,14 +244,15 @@ public class WorkoutActivity extends Activity implements OnClickListener
 					}
 					if (MainActivity.serie.equalsIgnoreCase("INTENSE 300")&& seriesCounter < 3) {// 3
 																				// repeat
-						textView_strenght.setText("Have a small break");
+					//	textView_strenght.setText("Have a small break");
 						// repeat
-						CountDownTimer countdown2 = new CountDownTimer(6000, 1000) {
+						CountDownTimer countdown2 = new CountDownTimer(REST_TIME, 1000) {
 
 							public void onTick(long millisUntilFinished)
 							{
 								// WorkoutActivity.this.textView_time.setText(""
 								// + millisUntilFinished / 1000);
+								textView_strenght.setText("Have a small break "+millisUntilFinished/1000+"'' left" );
 								if (D) {
 									Log.d(TAG, "- On tick -");
 								}
@@ -253,7 +261,7 @@ public class WorkoutActivity extends Activity implements OnClickListener
 							public void onFinish()
 							{
 								WorkoutActivity.this.running = false;
-
+								mp.start();
 								WorkoutActivity.this.textView_time.setText("" + MainActivity.timeOfTheSeries);
 
 								if (D) {
