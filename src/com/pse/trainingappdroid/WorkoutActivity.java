@@ -21,9 +21,9 @@ public class WorkoutActivity extends Activity implements OnClickListener
 	private static final Boolean D = true;
 	private static final String TAG = "WorkoutActivity";
 	private static final int REST_TIME = 10000;
-	private static final int LOW_VALUE = 51500;//46800
-	private static final int MED_VALUE = 57500;//52800
-
+	//Sensor values
+	public static  int LOW_VALUE = 51500;//46800
+	public static  int MED_VALUE = 57500;//52800
 	private int sensorLow_value;
 	private int sensorHigh_value;
 
@@ -155,7 +155,10 @@ public class WorkoutActivity extends Activity implements OnClickListener
 		this.sensorHigh_value = lowest_value_high + thresholdHigh;
 
 		if (D) {
-			Log.d(TAG, "Sensor values---" + this.sensorHigh_value + "---" + this.sensorLow_value);
+			Log.d(TAG, "Sensor threshold values---" + this.sensorHigh_value + "---" + this.sensorLow_value);
+		}
+		if (D) {
+			Log.d(TAG, "Sensor low/med defaults---" + this.LOW_VALUE + "---" + this.MED_VALUE);
 		}
 
 	}
