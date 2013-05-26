@@ -11,7 +11,7 @@ public class TabsSettingsActivity extends Activity
 {
 	//sometimes the sensor gets higher default values ~50k++ and sometimes lower 46k aprox
 	private Button adaptBut;
-	private boolean option = false;
+	private boolean option = true;
 
 	public void onCreate(Bundle savedInstanceState)
 	{
