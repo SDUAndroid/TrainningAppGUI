@@ -25,7 +25,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	public static final String COLUMN_PASSWORD = "password";
 
 	private static final String DATABASE_NAME = "counter.db";
-	private static final int DATABASE_VERSION = 1;
+	private static final int DATABASE_VERSION = 2;
 
 	// Database creation sql statement
 	private static final String DATABASE_CREATE = "create table "
@@ -45,7 +45,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase database) {
 		database.execSQL(DATABASE_CREATE);
 		database.execSQL(DATABASE_CREATE_LOGIN);
-		Log.d("Insert: ", "DATABASE_CREATE_LOGIN"); 
+		Log.d("Insert table: ", "DATABASE_CREATE"); 
+		Log.d("Insert table: ", "DATABASE_CREATE_LOGIN"); 
 	}
 
 	@Override

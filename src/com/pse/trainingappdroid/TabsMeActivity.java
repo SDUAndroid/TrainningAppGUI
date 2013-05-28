@@ -6,8 +6,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class TabsMeActivity extends Activity {
-	
+public class TabsMeActivity extends Activity
+{
+
 	private TextView Tv_lastworkout;
 
 	public void onCreate(Bundle savedInstanceState)
@@ -23,7 +24,11 @@ public class TabsMeActivity extends Activity {
 		datasource.open();
 		list = datasource.getAllCounters();
 		// Show the latest
-		Tv_lastworkout.setText("" + list.get(list.size() - 1));
+		if (list.size() != 0)
+			Tv_lastworkout.setText("" + list.get(list.size() - 1));
+		else {
+			Tv_lastworkout.setText("No workouts done");
+		}
 	}
 
 }
