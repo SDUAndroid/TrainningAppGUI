@@ -8,28 +8,21 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 
-public class WorkoutHistoryActivity extends Activity{
+public class WorkoutHistoryActivity extends Activity
+{
 
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_workout_history);	
-		
+		setContentView(R.layout.activity_workout_history);
+
 		LinearLayout layout = (LinearLayout) findViewById(R.id.chart);
 		LineGraph line = new LineGraph();
 
-    	GraphicalView gView = line.getView(this);   	
-    	
-    	layout.addView(gView);
-		
-		
+		GraphicalView gView = line.getView(this);
+
+		layout.addView(gView);
+
 	}
-	
-	
+
 }
-
-	
-	
-	
-	
-
-
