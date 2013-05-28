@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ public class LoginActivity extends Activity{
 	EditText inputPassword;
 	private boolean result;
 	private boolean res;
+	boolean checkBoxState;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,8 @@ public class LoginActivity extends Activity{
 		Button buttonRegister = (Button) findViewById(R.id.buttonRegister);
 		Button buttonForgotPass = (Button) findViewById(R.id.buttonForgotPass);
 		
+		final CheckBox keepMeLoggedIn = (CheckBox)findViewById(R.id.checkBoxKeepLog);
+		
 		inputUser = (EditText)  findViewById(R.id.editTextUsername);
 		inputPassword = (EditText)  findViewById(R.id.editTextPassword);
 
@@ -41,6 +45,14 @@ public class LoginActivity extends Activity{
 		
 		final SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
 		final Editor editor = pref.edit();
+		
+		checkBoxState = pref.getBoolean("Key_checkBoxState", false);
+		
+		//GUI: checked or not
+		keepMeLoggedIn.setChecked(checkBoxState);
+		
+		
+		keepLoggedState(checkBoxState);	
 		
 		buttonLoggin.setOnClickListener(new View.OnClickListener()
 			{public void onClick(View v) {
@@ -57,6 +69,16 @@ public class LoginActivity extends Activity{
 							  editor.putString("key_userName", userName); 
 							  editor.putString("key_password", password); 
 							  editor.commit(); 
+							
+							  if(keepMeLoggedIn.isChecked()){
+								  checkBoxState = true;
+								  editor.putBoolean("Key_checkBoxState", checkBoxState);
+								  editor.commit(); 
+							  }else{
+								  checkBoxState = false;
+								  editor.putBoolean("Key_checkBoxState", checkBoxState);
+								  editor.commit(); 
+							  }
 							  
 							  Intent intent = new Intent(LoginActivity.this , MainActivity.class);
 				        	  startActivity(intent);
@@ -78,8 +100,7 @@ public class LoginActivity extends Activity{
         		startActivity(intent);
         		}
         });
-		
-		
+			
 		buttonForgotPass.setOnClickListener(new View.OnClickListener()
 		{
         	public void onClick(View v) {
@@ -87,9 +108,15 @@ public class LoginActivity extends Activity{
         		startActivity(intent);
         		}
         });
-		
-		
 	}	
+	
+	public void keepLoggedState(boolean checkBoxLogged){
+		final SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+		if(checkBoxLogged == true){
+			inputUser.setText(pref.getString("key_userName", ""));
+			inputPassword.setText(pref.getString("key_password", ""));
+		}
+	}
 	
 	public void messageUser(String message){
 		Toast.makeText(this, message, 2000).show();
