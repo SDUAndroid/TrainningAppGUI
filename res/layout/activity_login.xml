@@ -33,7 +33,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="13dp"
         android:ems="10"
-        android:hint="@string/password" />
+        android:hint="@string/password"
+        android:password="true" />
 
     <CheckBox
         android:id="@+id/checkBoxKeepLog"

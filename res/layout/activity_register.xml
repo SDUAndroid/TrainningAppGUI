@@ -47,7 +47,8 @@
         android:layout_below="@+id/editTextUsername"
         android:layout_marginTop="13dp"
         android:ems="10"
-        android:hint="@string/password" />
+        android:hint="@string/password"
+        android:password="true" />
 
     <EditText
         android:id="@+id/EditTextConfirmPass"
@@ -57,6 +58,7 @@
         android:layout_below="@+id/editTextPassword"
         android:layout_marginTop="13dp"
         android:ems="10"
-        android:hint="@string/confirmPassword" />
+        android:hint="@string/confirmPassword"
+        android:password="true" />
 
 </RelativeLayout>
