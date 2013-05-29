@@ -61,7 +61,7 @@ public class LoginActivity extends Activity{
 	        		String password = inputPassword.getText().toString();
 
 	        		if(userName.isEmpty() == false && password.isEmpty() == false){
-
+	        			
 	        			result = compareUser(userName, password);
 						  
 						  if(result == true){
@@ -82,7 +82,7 @@ public class LoginActivity extends Activity{
 							  
 							  Intent intent = new Intent(LoginActivity.this , MainActivity.class);
 				        	  startActivity(intent);
-				              finish();
+				              //finish();
 						  }else{
 							  messageUser("Error: usename or password");
 							  Log.d("BUTTON_LOGIN", "error");
@@ -135,21 +135,20 @@ public class LoginActivity extends Activity{
 			userinformation.open();
 
 			Cursor cur = userinformation.fetchAllTodos();
-			startManagingCursor(cur);
-			// cur.moveToFirst();
+			cur.moveToFirst();
 
-			// Search in the table, if the id and the password exist or don't exist
-			while (cur.moveToNext()) {
-				// Compare the content of EditText with the data from the
-				// database
-				if (login.equals(cur.getString(1)) && password.equals(cur.getString(2))) {
-					res = true;
-				}
-				else {
-					res = false;
-				}
+			// Search in the table, if the login and the password are equals to two EditText
+			while (!cur.getString(1).toString().contains(login) && !cur.getString(2).toString().contains(login) ) {
+				// Increment the cursor +1
+				cur.moveToNext();
 			}
-			stopManagingCursor(cur);
+			if (cur.getString(1).toString().contains(login) && cur.getString(2).toString().contains(password))  {
+				res = true;
+			}
+			else {
+				res = false;
+			}
+			cur.close();
 			// Close database
 			userinformation.close();
 		} catch (Exception e1) {

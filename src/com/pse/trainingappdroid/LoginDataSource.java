@@ -60,7 +60,7 @@ public class LoginDataSource
 	public void deleteLogin(Login login)
 	{
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
-		db.delete(MySQLiteHelper.TABLE_LOGIN, MySQLiteHelper.COLUMN_IDUSER + " = ?",
+		db.delete(MySQLiteHelper.TABLE_LOGIN, MySQLiteHelper.COLUMN_IDUSER + " =? ",
 				new String[] { String.valueOf(login.getIdUser()) });
 		db.close();
 	}
@@ -69,7 +69,7 @@ public class LoginDataSource
 	public Cursor fetchAllTodos()
 	{
 		return database.query(MySQLiteHelper.TABLE_LOGIN, new String[] { MySQLiteHelper.COLUMN_IDUSER,
-				MySQLiteHelper.COLUMN_USER, MySQLiteHelper.COLUMN_PASSWORD }, null, null, null, null, null);
+				MySQLiteHelper.COLUMN_USER, MySQLiteHelper.COLUMN_PASSWORD }, null, null, null, null, null) ;
 	}
 
 }
