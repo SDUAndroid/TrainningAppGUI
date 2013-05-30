@@ -18,6 +18,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	public static final String TABLE_COUNTER = "counter";
 	public static final String COLUMN_ID = "_id";
 	public static final String COLUMN_MAXCOUNT = "maxCount";
+	public static final String COLUMN_USERCOUNT = "userCount";
 	
 	public static final String TABLE_LOGIN = "login";
 	public static final String COLUMN_IDUSER = "idUser";
@@ -29,9 +30,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
 	// Database creation sql statement
 	private static final String DATABASE_CREATE = "create table "
-			+ TABLE_COUNTER + "(" + COLUMN_ID
-			+ " integer primary key autoincrement, " + COLUMN_MAXCOUNT
-			+ " text not null);";
+			+ TABLE_COUNTER + "(" + COLUMN_ID + " integer primary key autoincrement, " 
+			+ COLUMN_MAXCOUNT + " text not null, "
+			+ COLUMN_USERCOUNT + " integer not null, FOREIGN KEY(" + COLUMN_USERCOUNT + ") REFERENCES " + TABLE_LOGIN + "(" + COLUMN_IDUSER + "));";
 
 	private static final String DATABASE_CREATE_LOGIN = "create table "
 			+ TABLE_LOGIN + "(" + COLUMN_IDUSER+ " integer primary key autoincrement, " +

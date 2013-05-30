@@ -7,6 +7,19 @@ package com.pse.trainingappdroid;
 public class Counter {
 	private long id;
 	private int maxCount;
+	private int userCount;
+
+	
+	public int getUserCount()
+	{
+		return userCount;
+	}
+
+	
+	public void setUserCount(int userCount)
+	{
+		this.userCount = userCount;
+	}
 
 	public long getId() {
 		return id;

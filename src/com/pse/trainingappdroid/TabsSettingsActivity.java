@@ -6,7 +6,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.text.LoginFilter;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,6 +23,7 @@ public class TabsSettingsActivity extends Activity
 	// lower 46k aprox
 	private Button adaptBut;
 	private boolean option = true;
+	private long res, result;
 
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -39,6 +42,7 @@ public class TabsSettingsActivity extends Activity
 																									// mode
 
 		final LoginDataSource db = new LoginDataSource(this);
+		final CountersDataSource dbCounter = new CountersDataSource(this);
 		final Editor editor = pref.edit();
 
 		adaptBut.setOnClickListener(new OnClickListener() {
@@ -71,6 +75,13 @@ public class TabsSettingsActivity extends Activity
 
 				String userRecovered = pref.getString("key_userName", "Not exist");
 				Login login = new Login();
+				result = compareID(userRecovered);
+
+				if (result != 0) {
+					dbCounter.open();
+					dbCounter.deleteCounterByID(result);
+					dbCounter.close();
+				}
 
 				db.open();
 				login = db.getLogin(userRecovered);
@@ -124,4 +135,39 @@ public class TabsSettingsActivity extends Activity
 
 	}
 
+	/**** Method allows to find the id of the user in order to remove his workout *****/
+	private long compareID(String loginuser)
+	{
+
+		try {
+			// Create an object of the class
+			LoginDataSource userinformation = new LoginDataSource(this);
+
+			// Open database to write indoors
+			userinformation.open();
+
+			Cursor cur = userinformation.fetchAllTodos();
+			cur.moveToFirst();
+
+			// Search in the table, if the login is equals to the username keep
+			// into preference
+			while (!cur.getString(1).toString().contains(loginuser)) {
+				// Increment the cursor +1
+				cur.moveToNext();
+			}
+			if (cur.getString(1).toString().contains(loginuser)) {
+				res = cur.getLong(0);
+			}
+			else {
+				res = 0;
+			}
+			cur.close();
+			// Close database
+			userinformation.close();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return res;
+	}
 }

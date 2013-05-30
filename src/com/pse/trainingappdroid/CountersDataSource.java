@@ -19,7 +19,8 @@ public class CountersDataSource {
   private SQLiteDatabase database;
   private MySQLiteHelper dbHelper;
   private String[] allColumns = { MySQLiteHelper.COLUMN_ID,
-      MySQLiteHelper.COLUMN_MAXCOUNT };
+      MySQLiteHelper.COLUMN_MAXCOUNT, MySQLiteHelper.COLUMN_USERCOUNT };
+	
 
   public CountersDataSource(Context context) {
     dbHelper = new MySQLiteHelper(context);
@@ -77,5 +78,12 @@ public class CountersDataSource {
     counter.setMaxCounter(cursor.getInt(1));
     return counter;
   }
+	
+	 public void deleteCounterByID(long id){ 
+		    System.out.println("Counter deleted with id: " + id);
+		    database.delete(MySQLiteHelper.TABLE_COUNTER, MySQLiteHelper.COLUMN_ID
+		        + " = " + id, null);
+		  }
+	
 } 
 
