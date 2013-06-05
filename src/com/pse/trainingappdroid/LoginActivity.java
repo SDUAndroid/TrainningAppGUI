@@ -24,6 +24,8 @@ public class LoginActivity extends Activity{
 	private boolean result;
 	private boolean res;
 	boolean checkBoxState;
+	public static  SharedPreferences pref;
+	public static  Editor editor;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +44,8 @@ public class LoginActivity extends Activity{
 		inputPassword = (EditText)  findViewById(R.id.editTextPassword);
 
 		final LoginDataSource db = new LoginDataSource(this);
-		
-		final SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
-		final Editor editor = pref.edit();
+		pref =  getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+		editor =   pref.edit();
 		
 		checkBoxState = pref.getBoolean("Key_checkBoxState", false);
 		

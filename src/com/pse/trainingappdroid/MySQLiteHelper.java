@@ -32,7 +32,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	private static final String DATABASE_CREATE = "create table "
 			+ TABLE_COUNTER + "(" + COLUMN_ID + " integer primary key autoincrement, " 
 			+ COLUMN_MAXCOUNT + " text not null, "
-			+ COLUMN_USERCOUNT + " integer not null, FOREIGN KEY(" + COLUMN_USERCOUNT + ") REFERENCES " + TABLE_LOGIN + "(" + COLUMN_IDUSER + "));";
+			+ COLUMN_USERCOUNT + " integer, FOREIGN KEY(" + COLUMN_USERCOUNT + ") REFERENCES " + TABLE_LOGIN + "(" + COLUMN_IDUSER + "));";
 
 	private static final String DATABASE_CREATE_LOGIN = "create table "
 			+ TABLE_LOGIN + "(" + COLUMN_IDUSER+ " integer primary key autoincrement, " +

@@ -23,7 +23,7 @@ public class TabsSettingsActivity extends Activity
 	// lower 46k aprox
 	private Button adaptBut;
 	private boolean option = true;
-	private long res, result;
+	private String result, res;
 
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -35,7 +35,7 @@ public class TabsSettingsActivity extends Activity
 		Button buttonPersonalData = (Button) findViewById(R.id.buttonPersonal);
 		adaptBut = (Button) this.findViewById(R.id.buttonAdapt);
 
-		final SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0
+		//final SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0
 																									// -
 																									// for
 																									// private
@@ -43,7 +43,7 @@ public class TabsSettingsActivity extends Activity
 
 		final LoginDataSource db = new LoginDataSource(this);
 		final CountersDataSource dbCounter = new CountersDataSource(this);
-		final Editor editor = pref.edit();
+		//final Editor editor = pref.edit();
 
 		adaptBut.setOnClickListener(new OnClickListener() {
 
@@ -73,13 +73,14 @@ public class TabsSettingsActivity extends Activity
 			public void onClick(View v)
 			{
 
-				String userRecovered = pref.getString("key_userName", "Not exist");
+				String userRecovered = LoginActivity.pref.getString("key_userName", "Not exist");
 				Login login = new Login();
 				result = compareID(userRecovered);
+				int idcount = Integer.parseInt(result);
 
-				if (result != 0) {
+				if (idcount != 0) {
 					dbCounter.open();
-					dbCounter.deleteCounterByID(result);
+					dbCounter.deleteCounterByID(idcount);
 					dbCounter.close();
 				}
 
@@ -94,8 +95,8 @@ public class TabsSettingsActivity extends Activity
 				startActivity(intent);
 				finish();
 
-				editor.clear();
-				editor.commit(); // commit changes
+				LoginActivity.editor.clear();
+				LoginActivity.editor.commit(); // commit changes
 			}
 		});
 
@@ -107,8 +108,8 @@ public class TabsSettingsActivity extends Activity
 			{
 
 				AlertDialog alertDialog = new AlertDialog.Builder(TabsSettingsActivity.this).create();
-				String userRecovered = pref.getString("key_userName", "error");
-				String passwordRecovered = pref.getString("key_password", "error");
+				String userRecovered = LoginActivity.pref.getString("key_userName", "error");
+				String passwordRecovered = LoginActivity.pref.getString("key_password", "error");
 
 				// Setting Dialog Title
 				alertDialog.setTitle("Personal data");
@@ -136,7 +137,7 @@ public class TabsSettingsActivity extends Activity
 	}
 
 	/**** Method allows to find the id of the user in order to remove his workout *****/
-	private long compareID(String loginuser)
+	private String compareID(String loginuser)
 	{
 
 		try {
@@ -156,10 +157,10 @@ public class TabsSettingsActivity extends Activity
 				cur.moveToNext();
 			}
 			if (cur.getString(1).toString().contains(loginuser)) {
-				res = cur.getLong(0);
+				res = cur.getString(0);
 			}
 			else {
-				res = 0;
+				res = "0";
 			}
 			cur.close();
 			// Close database

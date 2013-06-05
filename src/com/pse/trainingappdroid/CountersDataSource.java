@@ -34,9 +34,10 @@ public class CountersDataSource {
     dbHelper.close();
   }
 
-  public Counter createMaxCount(int maxCount) {
+  public Counter createMaxCount(int maxCount, int userid) {
     ContentValues values = new ContentValues();
     values.put(MySQLiteHelper.COLUMN_MAXCOUNT, maxCount);
+    values.put(MySQLiteHelper.COLUMN_USERCOUNT, userid);
     long insertId = database.insert(MySQLiteHelper.TABLE_COUNTER, null,
         values);
     Cursor cursor = database.query(MySQLiteHelper.TABLE_COUNTER,
